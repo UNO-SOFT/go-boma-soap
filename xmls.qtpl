@@ -1,0 +1,37 @@
+{% package soap %}
+
+{% import "encoding/base64" %}
+{% import "encoding/xml" %}
+{% import "fmt" %}
+{% import "github.com/tgulacsi/go/bufpool" %}
+
+{% collapsespace %}
+
+{% func (x extractXmlBomaMsgRequest) XML() %}
+<extractXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
+  <msgTypeName>{%s= x.Type %}</msgTypeName>
+  <serviceRequested>{%s= x.Service %}</serviceRequested>
+  <encryptedKey>{%= XML(x.Key) %}</encryptedKey>
+  <msgData>{%= XML(x.Data) %}</msgData>
+</extractXmlBomaMsgRequest>
+{% endfunc %}
+
+{% func XML(s any) %}
+{% code
+xmlEsc := func(x string) string {
+  buf := bufpool.Get()
+  defer bufpool.Put(buf)
+  if err := xml.EscapeText(buf, []byte(x)); err != nil {
+    panic(fmt.Errorf("escape %q: %w", x, err))
+  }
+  return buf.String()
+}
+%}
+{% switch x := s.(type) %}
+  {% case []byte %}{%s= base64.StdEncoding.EncodeToString(x) %}
+  {% case string %}{%s= xmlEsc(x) %}
+  {% default %}{% code panic(fmt.Errorf("unknown type %T", s)) %}
+{% endswitch %}
+{% endfunc %}
+
+{% endcollapsespace %}
