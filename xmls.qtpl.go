@@ -2,7 +2,7 @@
 // See https://github.com/valyala/quicktemplate for details.
 
 //line xmls.qtpl:1
-package soap
+package boma
 
 //line xmls.qtpl:3
 import "encoding/base64"
