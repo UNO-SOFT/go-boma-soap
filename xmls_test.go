@@ -1,3 +1,7 @@
+// Copyright 2017, 2026 Tamás Gulácsi. All rights reserved.
+//
+// SPDX-License-Identifier: AGPL-3.0
+
 package soap
 
 import (
