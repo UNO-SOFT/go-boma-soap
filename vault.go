@@ -9,19 +9,29 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"sync"
 
 	"github.com/oklog/ulid/v2"
 )
 
+const defaultMaxDoneFiles = 1000
+
+// Vault is a safe file storage for in-flight (in-process) messages.
 type Vault struct {
-	path string
-	list []string
-	done []string
+	path         string
+	list         []string
+	done         []string
+	maxDoneFiles int
 	sync.Mutex
 }
 
+// NewVault prepares a vault under the given path.
+//
+// Files in writing are under $path/tmp,
+// removed files move under $path/done,
+// all the current content is under $path.
 func NewVault(path string) (*Vault, error) {
 	dn := path
 	os.MkdirAll(dn, 0755)
@@ -42,6 +52,7 @@ func NewVault(path string) (*Vault, error) {
 		}
 		names = append(names, di.Name())
 	}
+	slices.Sort(names)
 
 	dn = filepath.Join(path, "tmp")
 	os.RemoveAll(dn)
@@ -63,7 +74,8 @@ func NewVault(path string) (*Vault, error) {
 		}
 		dones = append(dones, di.Name())
 	}
-	return &Vault{path: path, list: names, done: dones}, nil
+	slices.Sort(dones)
+	return &Vault{path: path, list: names, done: dones, maxDoneFiles: defaultMaxDoneFiles}, nil
 }
 
 type vaultFile struct {
@@ -102,6 +114,8 @@ func (vf *vaultFile) CloseWithError(err error) error {
 	return os.Rename(fn, filepath.Join(vf.dst, filepath.Base(fn)))
 }
 
+// NewWriter returns a new Writer with the preallocated size,
+// named with an ULID under the tmp dir.
 func (v *Vault) NewWriter(size int) (*vaultFile, error) {
 	v.Lock()
 	defer v.Unlock()
@@ -121,6 +135,7 @@ func (v *Vault) NewWriter(size int) (*vaultFile, error) {
 	return &vaultFile{f: f, dst: v.path}, nil
 }
 
+// Get the next (first) file from the vault.
 func (v *Vault) Get() (ReadDeleteNamer, error) {
 	v.Lock()
 	defer v.Unlock()
@@ -139,6 +154,8 @@ func (v *Vault) Get() (ReadDeleteNamer, error) {
 		name:       name,
 	}, nil
 }
+
+// Put the data into the vault (into a new file).
 func (v *Vault) Put(data []byte) (func() error, error) {
 	f, err := v.NewWriter(len(data))
 	if err != nil {
@@ -159,12 +176,16 @@ func (v *Vault) Put(data []byte) (func() error, error) {
 
 	return func() error { return v.Remove(name) }, nil
 }
+
+// Len returns the number of messages in the vault.
 func (v *Vault) Len() int {
 	v.Lock()
 	n := len(v.list)
 	v.Unlock()
 	return n
 }
+
+// Remove (move to the done folder) the named file from the vault.
 func (v *Vault) Remove(name string) error {
 	name = filepath.Base(name)
 	v.Lock()
@@ -175,7 +196,7 @@ func (v *Vault) Remove(name string) error {
 		err = os.Remove(fn)
 	} else {
 		v.done = append(v.done, name)
-		for len(v.done) > 1000 {
+		for len(v.done) > v.maxDoneFiles {
 			os.Remove(filepath.Join(v.path, "done", name))
 			v.done = v.done[1:]
 		}

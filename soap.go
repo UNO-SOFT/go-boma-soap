@@ -24,6 +24,8 @@ import (
 	"golang.org/x/time/rate"
 )
 
+//go:generate go tool qtc
+
 var (
 	DefaultRateLimit = rate.Limit(3)
 
@@ -34,38 +36,40 @@ var (
 	restartLimiter = rate.NewLimiter(1.0/3600.0, 1)
 )
 
-type SendReceiver interface {
-	Sender
-	Receiver
-}
-type Sender interface {
-	Send(context.Context, io.Reader) error
-}
-type Receiver interface {
-	Receive(ctx context.Context, w io.Writer) (ReceiveRootMsgResponse, error)
-	Decrypter
-}
-type Decrypter interface {
-	Decrypt(ctx context.Context, w io.Writer, key, msgTypeName string, data []byte) error
-	DecryptReader(ctx context.Context, w io.Writer, r io.Reader) (MsgHeader, error)
-}
+type (
+	SendReceiver interface {
+		Sender
+		Receiver
+	}
+	Sender interface {
+		Send(context.Context, io.Reader) error
+	}
+	Receiver interface {
+		Receive(ctx context.Context, w io.Writer) (ReceiveRootMsgResponse, error)
+		Decrypter
+	}
+	Decrypter interface {
+		Decrypt(ctx context.Context, w io.Writer, key, msgTypeName string, data []byte) error
+		DecryptReader(ctx context.Context, w io.Writer, r io.Reader) (MsgHeader, error)
+	}
 
-type soapClient struct {
-	Caller  soaphlp.Caller
-	limiter *rate.Limiter
-	cb      *gobreaker.CircuitBreaker[*xml.Decoder]
-}
+	client struct {
+		Caller  soaphlp.Caller
+		limiter *rate.Limiter
+		cb      *gobreaker.CircuitBreaker[*xml.Decoder]
+	}
+)
 
-func NewSOAP(endpointURL string, client *http.Client, rateLimit *rate.Limiter) soapClient {
-	if client == nil {
-		client = http.DefaultClient
+func NewClient(endpointURL string, httpClient *http.Client, rateLimit *rate.Limiter) client {
+	if httpClient == nil {
+		httpClient = http.DefaultClient
 	}
 	if rateLimit == nil {
 		rateLimit = rate.NewLimiter(DefaultRateLimit, 1)
 	}
 	// zlog.SFromContext(ctx).Info("NewSOAP", "url", endpointURL, "limit", rateLimit.Limit())
-	return soapClient{
-		Caller:  soaphlp.NewClient(endpointURL, "", client),
+	return client{
+		Caller:  soaphlp.NewClient(endpointURL, "", httpClient),
 		limiter: rateLimit,
 		cb: gobreaker.NewCircuitBreaker[*xml.Decoder](gobreaker.Settings{
 			Name: "boma-soap",
@@ -120,7 +124,7 @@ func NewSOAP(endpointURL string, client *http.Client, rateLimit *rate.Limiter) s
 	}
 }
 
-func (cl soapClient) call(ctx context.Context, w io.Writer, r io.Reader) (*xml.Decoder, error) {
+func (cl client) call(ctx context.Context, w io.Writer, r io.Reader) (*xml.Decoder, error) {
 	if err := cl.limiter.Wait(ctx); err != nil {
 		return nil, err
 	}
@@ -129,7 +133,7 @@ func (cl soapClient) call(ctx context.Context, w io.Writer, r io.Reader) (*xml.D
 	})
 }
 
-func (cl soapClient) Receive(ctx context.Context, w io.Writer) (ReceiveRootMsgResponse, error) {
+func (cl client) Receive(ctx context.Context, w io.Writer) (ReceiveRootMsgResponse, error) {
 	if err := ctx.Err(); err != nil {
 		return ReceiveRootMsgResponse{}, err
 	}
@@ -159,7 +163,7 @@ type extractXmlBomaMsgRequest struct {
 	Service string
 }
 
-func (cl soapClient) Decrypt(ctx context.Context, w io.Writer, key, msgTypeName string, msg []byte) error {
+func (cl client) Decrypt(ctx context.Context, w io.Writer, key, msgTypeName string, msg []byte) error {
 	if err := ctx.Err(); err != nil {
 		return err
 	}
@@ -194,7 +198,7 @@ type ExtractXmlBomaMsgResponse struct {
 	Data []byte `xml:"msgData"`
 }
 
-func (cl soapClient) DecryptReader(ctx context.Context, w io.Writer, r io.Reader) (MsgHeader, error) {
+func (cl client) DecryptReader(ctx context.Context, w io.Writer, r io.Reader) (MsgHeader, error) {
 	buf := bufpool.Get()
 	defer bufpool.Put(buf)
 	var v ReceiveRootMsgResponse
@@ -271,27 +275,30 @@ func (v ReceiveRootMsgResponse) Decrypt(ctx context.Context, w io.Writer, cl Dec
 	return cl.Decrypt(ctx, w, v.Header.Key, v.Header.Type, v.Data)
 }
 
-type SendXmlBomaMsgResponse struct {
-	Header    MsgHeader `xml:"msgHeader"`
-	Responded string    `xml:"serviceResponded"`
-	Key       string    `xml:"encryptedKey"`
-	Data      []byte    `xml:"msgData"`
-}
-type MsgHeader struct {
-	Type      string `xml:"msgTypeName"`
-	Sender    string `xml:"senderInsCo"`
-	Target    string `xml:"targetInsCo"`
-	MsgID     string `xml:"messageId"`
-	RefID     string `xml:"referenceId"`
-	Reason    string `xml:"reasonOfRequest"`
-	Result    string `xml:"resultCode"`
-	DateTime  string `xml:"messageDateTime"`
-	ReqID     string `xml:"requestersId"`
-	Key       string `xml:"encryptedKey"`
-	Responded string `xml:"-"`
-}
+type (
+	SendXmlBomaMsgResponse struct {
+		Header    MsgHeader `xml:"msgHeader"`
+		Responded string    `xml:"serviceResponded"`
+		Key       string    `xml:"encryptedKey"`
+		Data      []byte    `xml:"msgData"`
+	}
 
-func (cl soapClient) Send(ctx context.Context, r io.Reader) error {
+	MsgHeader struct {
+		Type      string `xml:"msgTypeName"`
+		Sender    string `xml:"senderInsCo"`
+		Target    string `xml:"targetInsCo"`
+		MsgID     string `xml:"messageId"`
+		RefID     string `xml:"referenceId"`
+		Reason    string `xml:"reasonOfRequest"`
+		Result    string `xml:"resultCode"`
+		DateTime  string `xml:"messageDateTime"`
+		ReqID     string `xml:"requestersId"`
+		Key       string `xml:"encryptedKey"`
+		Responded string `xml:"-"`
+	}
+)
+
+func (cl client) Send(ctx context.Context, r io.Reader) error {
 	if err := ctx.Err(); err != nil {
 		return err
 	}

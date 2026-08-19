@@ -19,7 +19,7 @@ func TestVault(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for i := 0; i < 1000; i++ {
+	for i := range vault.maxDoneFiles {
 		want := fmt.Sprintf("%03d", i)
 		if _, err := vault.Put([]byte(want)); err != nil {
 			t.Fatal(err)
