@@ -35,7 +35,7 @@ var %s = map[string]map[string]string{
 		for _, k := range slices.Sorted(maps.Keys(enums[typeName])) {
 			fmt.Fprintf(&buf, "\t\t%q: %q,\n", k, enums[typeName][k])
 		}
-		buf.WriteString("\t},")
+		buf.WriteString("\t},\n")
 	}
 	buf.WriteString("}\n")
 	if fileName == "" || fileName == "-" {
