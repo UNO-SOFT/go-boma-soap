@@ -1,11 +1,32 @@
-{% package soap %}
+{% package boma %}
 
 {% import "encoding/base64" %}
 {% import "encoding/xml" %}
 {% import "fmt" %}
+{% import "time" %}
 {% import "github.com/tgulacsi/go/bufpool" %}
 
 {% collapsespace %}
+
+{% func (x SendXmlBomaMsgRequest) XML() %}
+<sendXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
+  <msgHeader>
+    <basebns:msgTypeName>{%= XML(x.Type) %}</basebns:msgTypeName>
+    <basebns:senderInsCo>{%= XML(x.Sender) %}</basebns:senderInsCo>
+    <basebns:targetInsCo>{%= XML(x.Target) %}</basebns:targetInsCo>
+    <basebns:messageId>{%= XML(x.MsgID) %}</basebns:messageId>{%= XwrapS(x.RefID, "basebns:referenceId") %}{% comment %}
+    <basebns:highPriorityRequest></basebns:highPriorityRequest>{% endcomment %}
+	{% if x.HasROR() %}{%= XwrapS(x.Reason, "basebns:reasonOfRequest") %}{% endif %}
+    <basebns:messageDateTime>{%= XdateTime(x.DateTime) %}</basebns:messageDateTime>
+    {%= XwrapS(x.ReqID, "basebns:requestersId") %}
+	<basebns:encryptedKey />
+  </msgHeader>
+  <encryptionRequired>true</encryptionRequired>
+  <serviceRequested>SEND</serviceRequested>
+  <msgData><![CDATA[{%= Data(x.Data) %}]]></msgData>
+</sendXmlBomaMsgRequest>
+{% endfunc %}
+
 
 {% func (x extractXmlBomaMsgRequest) XML() %}
 <extractXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
@@ -32,6 +53,20 @@ xmlEsc := func(x string) string {
   {% case string %}{%s= xmlEsc(x) %}
   {% default %}{% code panic(fmt.Errorf("unknown type %T", s)) %}
 {% endswitch %}
+{% endfunc %}
+
+{% func XwrapS(x, tag string) %}
+{% if x != "" %}<{%s= tag %}>{%= XML(x) %}</{%s= tag %}>{% endif %}
+{% endfunc %}
+
+{% func XdateTime(x any) %}{% code
+  s, ok := x.(string)
+  if !ok {
+    if t := getTime(x); !t.IsZero() {
+      s = t.Format(time.RFC3339)
+    }
+  }
+%}{% if s != "" %}{%s= s %}{% endif %}
 {% endfunc %}
 
 {% endcollapsespace %}

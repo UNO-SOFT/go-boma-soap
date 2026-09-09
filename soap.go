@@ -7,6 +7,7 @@ package boma
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"encoding/base64"
 	"encoding/xml"
 	"errors"
@@ -23,6 +24,7 @@ import (
 	"github.com/tgulacsi/go/bufpool"
 	"github.com/tgulacsi/go/soaphlp"
 	"github.com/valyala/bytebufferpool"
+	"github.com/valyala/quicktemplate"
 	"golang.org/x/time/rate"
 )
 
@@ -282,6 +284,12 @@ func (v ReceiveRootMsgResponse) Decrypt(ctx context.Context, w io.Writer, cl Dec
 }
 
 type (
+	SendXmlBomaMsgRequest struct {
+		MsgHeader
+		DateTime sql.NullTime `xml:"messageDateTime"`
+		Data     []byte       `xml:"-"`
+	}
+
 	SendXmlBomaMsgResponse struct {
 		Header    MsgHeader `xml:"msgHeader"`
 		Responded string    `xml:"serviceResponded"`
@@ -303,6 +311,47 @@ type (
 		Responded string `xml:"-"`
 	}
 )
+
+func (x SendXmlBomaMsgRequest) WriteTo(w io.Writer) (int64, error) {
+	cw := countingWriter{W: w}
+	W := quicktemplate.AcquireWriter(&cw)
+	x.StreamXML(W)
+	quicktemplate.ReleaseWriter(W)
+	return cw.N, cw.Err
+}
+
+func (x SendXmlBomaMsgRequest) HasROR() bool {
+	// WARN: the envelope cannot contain reasonOfRequest if the message does not contain it!
+	const ror = "reasonOfRequest>"
+	return bytes.Contains(x.Data, []byte(ror))
+}
+
+func StreamData(W *quicktemplate.Writer, data any) error {
+	switch x := data.(type) {
+	case []byte:
+		_, err := W.W().Write(x)
+		return err
+	case string:
+		_, err := io.WriteString(W.W(), x)
+		return err
+	}
+	if rdr, ok := data.(interface{ io.Reader }); ok {
+		_, err := io.Copy(W.W(), rdr)
+		return err
+	} else if enc, ok := data.(interface{ Encode(*bytes.Buffer) error }); ok {
+		buf := bufpool.Get()
+		err := enc.Encode(buf)
+		if err == nil {
+			buf.WriteTo(W.W())
+		}
+		bufpool.Put(buf)
+		return err
+	} else if str, ok := data.(interface{ StreamXML(*quicktemplate.Writer) }); ok {
+		str.StreamXML(W)
+		return nil
+	}
+	return fmt.Errorf("unknown Data type %T", data)
+}
 
 func (cl client) Send(ctx context.Context, r io.Reader) error {
 	if err := ctx.Err(); err != nil {
@@ -337,4 +386,31 @@ func trimXMLHeader(s string) string {
 		}
 	}
 	return s
+}
+
+func getTime(t any) time.Time {
+	switch x := t.(type) {
+	case sql.NullTime:
+		if x.Valid {
+			return x.Time
+		}
+	case time.Time:
+		return x
+	default:
+		panic(fmt.Sprintf("not dateTime %T", t))
+	}
+	return time.Time{}
+}
+
+type countingWriter struct {
+	W   io.Writer
+	Err error
+	N   int64
+}
+
+func (cw *countingWriter) Write(p []byte) (int, error) {
+	n, err := cw.W.Write(p)
+	cw.N += int64(n)
+	cw.Err = err
+	return n, err
 }
