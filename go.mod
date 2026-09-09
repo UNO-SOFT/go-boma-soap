@@ -1,6 +1,6 @@
 module github.com/UNO-SOFT/go-boma-soap
 
-go 1.26.5
+go 1.27
 
 tool github.com/valyala/quicktemplate/qtc
 
@@ -8,9 +8,10 @@ require (
 	github.com/UNO-SOFT/zlog v0.8.6
 	github.com/oklog/ulid/v2 v2.1.2
 	github.com/sony/gobreaker/v2 v2.4.0
-	github.com/tgulacsi/go v0.30.0
+	github.com/tgulacsi/go v0.30.1-0.20260909115116-acca3719170f
 	github.com/valyala/bytebufferpool v1.0.0
 	github.com/valyala/quicktemplate v1.8.0
+	golang.org/x/text v0.40.0
 	golang.org/x/time v0.15.0
 )
 
@@ -21,3 +22,5 @@ require (
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/term v0.45.0 // indirect
 )
+
+// replace github.com/tgulacsi/go => ../../tgulacsi/go

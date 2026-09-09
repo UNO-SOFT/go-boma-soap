@@ -39,6 +39,10 @@ var (
 )
 
 type (
+	HTTPDoer interface {
+		Do(*http.Request) (*http.Response, error)
+	}
+
 	SendReceiver interface {
 		Sender
 		Receiver
@@ -62,7 +66,7 @@ type (
 	}
 )
 
-func NewClient(endpointURL string, httpClient *http.Client, rateLimit *rate.Limiter) client {
+func NewClient(endpointURL string, httpClient HTTPDoer, rateLimit *rate.Limiter) client {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
 	}
@@ -175,7 +179,7 @@ func (cl client) Decrypt(ctx context.Context, w io.Writer, key, msgTypeName stri
 	B := bytebufferpool.Get()
 	defer bytebufferpool.Put(B)
 	req := extractXmlBomaMsgRequest{
-		Type: msgTypeName, Key: key, Data: string(msg),
+		Type: msgTypeName, Key: key, Data: trimXMLHeader(string(msg)),
 		Service: "EXTRACT_DEC_BOMA_MSG",
 	}
 	req.WriteXML(B)
@@ -324,4 +328,13 @@ func (cl client) Send(ctx context.Context, r io.Reader) error {
 		return fmt.Errorf("%s: %w", v.Responded, ErrSend)
 	}
 	return nil
+}
+
+func trimXMLHeader(s string) string {
+	if rest, ok := strings.CutPrefix(s, "<?xml"); ok {
+		if _, rest, ok = strings.Cut(rest, "?>"); ok {
+			return strings.TrimSpace(rest)
+		}
+	}
+	return s
 }
