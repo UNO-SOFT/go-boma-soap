@@ -6,7 +6,16 @@
 {% import "time" %}
 {% import "github.com/tgulacsi/go/bufpool" %}
 
-{% collapsespace %}
+{% stripspace %}
+
+{% func (x SendXmlMultiBomaMsgRequest) XML() %}
+<sendXmlMultiBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
+  <targetList>{% for y := range x.Targets %}
+    <targetInsCo>{%= XML(y) %}</targetInsCo>
+  {% endfor %}</targetList>
+  {%= x.SendXmlBomaMsgRequest.XML() %}
+</sendXmlMultiBomaMsgRequest>
+{% endfunc %}
 
 {% func (x SendXmlBomaMsgRequest) XML() %}
 <sendXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
@@ -69,4 +78,4 @@ xmlEsc := func(x string) string {
 %}{% if s != "" %}{%s= s %}{% endif %}
 {% endfunc %}
 
-{% endcollapsespace %}
+{% endstripspace %}

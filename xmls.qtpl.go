@@ -33,132 +33,177 @@ var (
 )
 
 //line xmls.qtpl:11
-func (x SendXmlBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
+func (x SendXmlMultiBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
 //line xmls.qtpl:11
-	qw422016.N().S(` <sendXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"> <msgHeader> <basebns:msgTypeName>`)
+	qw422016.N().S(`<sendXmlMultiBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"><targetList>`)
+//line xmls.qtpl:13
+	for y := range x.Targets {
+//line xmls.qtpl:13
+		qw422016.N().S(`<targetInsCo>`)
 //line xmls.qtpl:14
-	StreamXML(qw422016, x.Type)
+		StreamXML(qw422016, y)
 //line xmls.qtpl:14
-	qw422016.N().S(`</basebns:msgTypeName> <basebns:senderInsCo>`)
+		qw422016.N().S(`</targetInsCo>`)
 //line xmls.qtpl:15
-	StreamXML(qw422016, x.Sender)
-//line xmls.qtpl:15
-	qw422016.N().S(`</basebns:senderInsCo> <basebns:targetInsCo>`)
-//line xmls.qtpl:16
-	StreamXML(qw422016, x.Target)
-//line xmls.qtpl:16
-	qw422016.N().S(`</basebns:targetInsCo> <basebns:messageId>`)
-//line xmls.qtpl:17
-	StreamXML(qw422016, x.MsgID)
-//line xmls.qtpl:17
-	qw422016.N().S(`</basebns:messageId>`)
-//line xmls.qtpl:17
-	StreamXwrapS(qw422016, x.RefID, "basebns:referenceId")
-//line xmls.qtpl:18
-	qw422016.N().S(` `)
-//line xmls.qtpl:19
-	if x.HasROR() {
-//line xmls.qtpl:19
-		StreamXwrapS(qw422016, x.Reason, "basebns:reasonOfRequest")
-//line xmls.qtpl:19
 	}
-//line xmls.qtpl:19
-	qw422016.N().S(` <basebns:messageDateTime>`)
+//line xmls.qtpl:15
+	qw422016.N().S(`</targetList>`)
+//line xmls.qtpl:16
+	x.SendXmlBomaMsgRequest.StreamXML(qw422016)
+//line xmls.qtpl:16
+	qw422016.N().S(`</sendXmlMultiBomaMsgRequest>`)
+//line xmls.qtpl:18
+}
+
+//line xmls.qtpl:18
+func (x SendXmlMultiBomaMsgRequest) WriteXML(qq422016 qtio422016.Writer) {
+//line xmls.qtpl:18
+	qw422016 := qt422016.AcquireWriter(qq422016)
+//line xmls.qtpl:18
+	x.StreamXML(qw422016)
+//line xmls.qtpl:18
+	qt422016.ReleaseWriter(qw422016)
+//line xmls.qtpl:18
+}
+
+//line xmls.qtpl:18
+func (x SendXmlMultiBomaMsgRequest) XML() string {
+//line xmls.qtpl:18
+	qb422016 := qt422016.AcquireByteBuffer()
+//line xmls.qtpl:18
+	x.WriteXML(qb422016)
+//line xmls.qtpl:18
+	qs422016 := string(qb422016.B)
+//line xmls.qtpl:18
+	qt422016.ReleaseByteBuffer(qb422016)
+//line xmls.qtpl:18
+	return qs422016
+//line xmls.qtpl:18
+}
+
 //line xmls.qtpl:20
+func (x SendXmlBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
+//line xmls.qtpl:20
+	qw422016.N().S(`<sendXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"><msgHeader><basebns:msgTypeName>`)
+//line xmls.qtpl:23
+	StreamXML(qw422016, x.Type)
+//line xmls.qtpl:23
+	qw422016.N().S(`</basebns:msgTypeName><basebns:senderInsCo>`)
+//line xmls.qtpl:24
+	StreamXML(qw422016, x.Sender)
+//line xmls.qtpl:24
+	qw422016.N().S(`</basebns:senderInsCo><basebns:targetInsCo>`)
+//line xmls.qtpl:25
+	StreamXML(qw422016, x.Target)
+//line xmls.qtpl:25
+	qw422016.N().S(`</basebns:targetInsCo><basebns:messageId>`)
+//line xmls.qtpl:26
+	StreamXML(qw422016, x.MsgID)
+//line xmls.qtpl:26
+	qw422016.N().S(`</basebns:messageId>`)
+//line xmls.qtpl:26
+	StreamXwrapS(qw422016, x.RefID, "basebns:referenceId")
+//line xmls.qtpl:28
+	if x.HasROR() {
+//line xmls.qtpl:28
+		StreamXwrapS(qw422016, x.Reason, "basebns:reasonOfRequest")
+//line xmls.qtpl:28
+	}
+//line xmls.qtpl:28
+	qw422016.N().S(`<basebns:messageDateTime>`)
+//line xmls.qtpl:29
 	StreamXdateTime(qw422016, x.DateTime)
-//line xmls.qtpl:20
-	qw422016.N().S(`</basebns:messageDateTime> `)
-//line xmls.qtpl:21
+//line xmls.qtpl:29
+	qw422016.N().S(`</basebns:messageDateTime>`)
+//line xmls.qtpl:30
 	StreamXwrapS(qw422016, x.ReqID, "basebns:requestersId")
-//line xmls.qtpl:21
-	qw422016.N().S(` <basebns:encryptedKey /> </msgHeader> <encryptionRequired>true</encryptionRequired> <serviceRequested>SEND</serviceRequested> <msgData><![CDATA[`)
-//line xmls.qtpl:26
+//line xmls.qtpl:30
+	qw422016.N().S(`<basebns:encryptedKey /></msgHeader><encryptionRequired>true</encryptionRequired><serviceRequested>SEND</serviceRequested><msgData><![CDATA[`)
+//line xmls.qtpl:35
 	StreamData(qw422016, x.Data)
-//line xmls.qtpl:26
-	qw422016.N().S(`]]></msgData> </sendXmlBomaMsgRequest> `)
-//line xmls.qtpl:28
+//line xmls.qtpl:35
+	qw422016.N().S(`]]></msgData></sendXmlBomaMsgRequest>`)
+//line xmls.qtpl:37
 }
 
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 func (x SendXmlBomaMsgRequest) WriteXML(qq422016 qtio422016.Writer) {
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	x.StreamXML(qw422016)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	qt422016.ReleaseWriter(qw422016)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 }
 
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 func (x SendXmlBomaMsgRequest) XML() string {
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	qb422016 := qt422016.AcquireByteBuffer()
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	x.WriteXML(qb422016)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	qs422016 := string(qb422016.B)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	qt422016.ReleaseByteBuffer(qb422016)
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 	return qs422016
-//line xmls.qtpl:28
+//line xmls.qtpl:37
 }
 
-//line xmls.qtpl:31
+//line xmls.qtpl:40
 func (x extractXmlBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
-//line xmls.qtpl:31
-	qw422016.N().S(` <extractXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"> <msgTypeName>`)
-//line xmls.qtpl:33
-	qw422016.N().S(x.Type)
-//line xmls.qtpl:33
-	qw422016.N().S(`</msgTypeName> <serviceRequested>`)
-//line xmls.qtpl:34
-	qw422016.N().S(x.Service)
-//line xmls.qtpl:34
-	qw422016.N().S(`</serviceRequested> <encryptedKey>`)
-//line xmls.qtpl:35
-	StreamXML(qw422016, x.Key)
-//line xmls.qtpl:35
-	qw422016.N().S(`</encryptedKey> <msgData>`)
-//line xmls.qtpl:36
-	StreamXML(qw422016, x.Data)
-//line xmls.qtpl:36
-	qw422016.N().S(`</msgData> </extractXmlBomaMsgRequest> `)
-//line xmls.qtpl:38
-}
-
-//line xmls.qtpl:38
-func (x extractXmlBomaMsgRequest) WriteXML(qq422016 qtio422016.Writer) {
-//line xmls.qtpl:38
-	qw422016 := qt422016.AcquireWriter(qq422016)
-//line xmls.qtpl:38
-	x.StreamXML(qw422016)
-//line xmls.qtpl:38
-	qt422016.ReleaseWriter(qw422016)
-//line xmls.qtpl:38
-}
-
-//line xmls.qtpl:38
-func (x extractXmlBomaMsgRequest) XML() string {
-//line xmls.qtpl:38
-	qb422016 := qt422016.AcquireByteBuffer()
-//line xmls.qtpl:38
-	x.WriteXML(qb422016)
-//line xmls.qtpl:38
-	qs422016 := string(qb422016.B)
-//line xmls.qtpl:38
-	qt422016.ReleaseByteBuffer(qb422016)
-//line xmls.qtpl:38
-	return qs422016
-//line xmls.qtpl:38
-}
-
 //line xmls.qtpl:40
-func StreamXML(qw422016 *qt422016.Writer, s any) {
-//line xmls.qtpl:40
-	qw422016.N().S(` `)
+	qw422016.N().S(`<extractXmlBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"><msgTypeName>`)
 //line xmls.qtpl:42
+	qw422016.N().S(x.Type)
+//line xmls.qtpl:42
+	qw422016.N().S(`</msgTypeName><serviceRequested>`)
+//line xmls.qtpl:43
+	qw422016.N().S(x.Service)
+//line xmls.qtpl:43
+	qw422016.N().S(`</serviceRequested><encryptedKey>`)
+//line xmls.qtpl:44
+	StreamXML(qw422016, x.Key)
+//line xmls.qtpl:44
+	qw422016.N().S(`</encryptedKey><msgData>`)
+//line xmls.qtpl:45
+	StreamXML(qw422016, x.Data)
+//line xmls.qtpl:45
+	qw422016.N().S(`</msgData></extractXmlBomaMsgRequest>`)
+//line xmls.qtpl:47
+}
+
+//line xmls.qtpl:47
+func (x extractXmlBomaMsgRequest) WriteXML(qq422016 qtio422016.Writer) {
+//line xmls.qtpl:47
+	qw422016 := qt422016.AcquireWriter(qq422016)
+//line xmls.qtpl:47
+	x.StreamXML(qw422016)
+//line xmls.qtpl:47
+	qt422016.ReleaseWriter(qw422016)
+//line xmls.qtpl:47
+}
+
+//line xmls.qtpl:47
+func (x extractXmlBomaMsgRequest) XML() string {
+//line xmls.qtpl:47
+	qb422016 := qt422016.AcquireByteBuffer()
+//line xmls.qtpl:47
+	x.WriteXML(qb422016)
+//line xmls.qtpl:47
+	qs422016 := string(qb422016.B)
+//line xmls.qtpl:47
+	qt422016.ReleaseByteBuffer(qb422016)
+//line xmls.qtpl:47
+	return qs422016
+//line xmls.qtpl:47
+}
+
+//line xmls.qtpl:49
+func StreamXML(qw422016 *qt422016.Writer, s any) {
+//line xmls.qtpl:51
 	xmlEsc := func(x string) string {
 		buf := bufpool.Get()
 		defer bufpool.Put(buf)
@@ -168,118 +213,104 @@ func StreamXML(qw422016 *qt422016.Writer, s any) {
 		return buf.String()
 	}
 
-//line xmls.qtpl:50
-	qw422016.N().S(` `)
-//line xmls.qtpl:51
+//line xmls.qtpl:60
 	switch x := s.(type) {
-//line xmls.qtpl:52
+//line xmls.qtpl:61
 	case []byte:
-//line xmls.qtpl:52
+//line xmls.qtpl:61
 		qw422016.N().S(base64.StdEncoding.EncodeToString(x))
-//line xmls.qtpl:52
-		qw422016.N().S(` `)
-//line xmls.qtpl:53
+//line xmls.qtpl:62
 	case string:
-//line xmls.qtpl:53
+//line xmls.qtpl:62
 		qw422016.N().S(xmlEsc(x))
-//line xmls.qtpl:53
-		qw422016.N().S(` `)
-//line xmls.qtpl:54
+//line xmls.qtpl:63
 	default:
-//line xmls.qtpl:54
+//line xmls.qtpl:63
 		panic(fmt.Errorf("unknown type %T", s))
 
-//line xmls.qtpl:54
-		qw422016.N().S(` `)
-//line xmls.qtpl:55
+//line xmls.qtpl:64
 	}
-//line xmls.qtpl:55
-	qw422016.N().S(` `)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 }
 
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 func WriteXML(qq422016 qtio422016.Writer, s any) {
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	StreamXML(qw422016, s)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	qt422016.ReleaseWriter(qw422016)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 }
 
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 func XML(s any) string {
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	qb422016 := qt422016.AcquireByteBuffer()
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	WriteXML(qb422016, s)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	qs422016 := string(qb422016.B)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	qt422016.ReleaseByteBuffer(qb422016)
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 	return qs422016
-//line xmls.qtpl:56
+//line xmls.qtpl:65
 }
 
-//line xmls.qtpl:58
+//line xmls.qtpl:67
 func StreamXwrapS(qw422016 *qt422016.Writer, x, tag string) {
-//line xmls.qtpl:58
-	qw422016.N().S(` `)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 	if x != "" {
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(`<`)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(tag)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(`>`)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		StreamXML(qw422016, x)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(`</`)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(tag)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 		qw422016.N().S(`>`)
-//line xmls.qtpl:59
+//line xmls.qtpl:68
 	}
-//line xmls.qtpl:59
-	qw422016.N().S(` `)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 }
 
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 func WriteXwrapS(qq422016 qtio422016.Writer, x, tag string) {
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	StreamXwrapS(qw422016, x, tag)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	qt422016.ReleaseWriter(qw422016)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 }
 
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 func XwrapS(x, tag string) string {
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	qb422016 := qt422016.AcquireByteBuffer()
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	WriteXwrapS(qb422016, x, tag)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	qs422016 := string(qb422016.B)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	qt422016.ReleaseByteBuffer(qb422016)
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 	return qs422016
-//line xmls.qtpl:60
+//line xmls.qtpl:69
 }
 
-//line xmls.qtpl:62
+//line xmls.qtpl:71
 func StreamXdateTime(qw422016 *qt422016.Writer, x any) {
-//line xmls.qtpl:63
+//line xmls.qtpl:72
 	s, ok := x.(string)
 	if !ok {
 		if t := getTime(x); !t.IsZero() {
@@ -287,39 +318,37 @@ func StreamXdateTime(qw422016 *qt422016.Writer, x any) {
 		}
 	}
 
-//line xmls.qtpl:69
+//line xmls.qtpl:78
 	if s != "" {
-//line xmls.qtpl:69
+//line xmls.qtpl:78
 		qw422016.N().S(s)
-//line xmls.qtpl:69
+//line xmls.qtpl:78
 	}
-//line xmls.qtpl:69
-	qw422016.N().S(` `)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 }
 
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 func WriteXdateTime(qq422016 qtio422016.Writer, x any) {
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	StreamXdateTime(qw422016, x)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	qt422016.ReleaseWriter(qw422016)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 }
 
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 func XdateTime(x any) string {
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	qb422016 := qt422016.AcquireByteBuffer()
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	WriteXdateTime(qb422016, x)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	qs422016 := string(qb422016.B)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	qt422016.ReleaseByteBuffer(qb422016)
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 	return qs422016
-//line xmls.qtpl:70
+//line xmls.qtpl:79
 }

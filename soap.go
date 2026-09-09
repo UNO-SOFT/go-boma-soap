@@ -297,6 +297,14 @@ type (
 		Data      []byte    `xml:"msgData"`
 	}
 
+	SendXmlMultiBomaMsgRequest struct {
+		Targets               []string `xml:"targetList"`
+		SendXmlBomaMsgRequest `xml:"sendXmlBomaMsgRequest"`
+	}
+	SendXmlMultiBomaMsgResponse struct {
+		Responses []SendXmlBomaMsgResponse `xml:"sendXmlBomaMsgResponse"`
+	}
+
 	MsgHeader struct {
 		Type      string `xml:"msgTypeName"`
 		Sender    string `xml:"senderInsCo"`
