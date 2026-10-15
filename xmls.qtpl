@@ -42,7 +42,7 @@
   <msgTypeName>{%s= x.Type %}</msgTypeName>
   <serviceRequested>{%s= x.Service %}</serviceRequested>
   <encryptedKey>{%= XML(x.Key) %}</encryptedKey>
-  <msgData>{%= XML(x.Data) %}</msgData>
+  <msgData><![CDATA[{%= Data(x.Data) %}]]></msgData>
 </extractXmlBomaMsgRequest>
 {% endfunc %}
 
