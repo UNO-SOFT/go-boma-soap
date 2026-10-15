@@ -167,11 +167,11 @@ func (x extractXmlBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
 //line xmls.qtpl:44
 	StreamXML(qw422016, x.Key)
 //line xmls.qtpl:44
-	qw422016.N().S(`</encryptedKey><msgData>`)
+	qw422016.N().S(`</encryptedKey><msgData><![CDATA[`)
 //line xmls.qtpl:45
-	StreamXML(qw422016, x.Data)
+	StreamData(qw422016, x.Data)
 //line xmls.qtpl:45
-	qw422016.N().S(`</msgData></extractXmlBomaMsgRequest>`)
+	qw422016.N().S(`]]></msgData></extractXmlBomaMsgRequest>`)
 //line xmls.qtpl:47
 }
 
