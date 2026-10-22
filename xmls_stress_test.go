@@ -315,7 +315,7 @@ func validateWithXSD(t *testing.T, doc string) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
-	cmd := exec.CommandContext(ctx, xmllint(), "--noout", "--schema", stressSchema, "-")
+	cmd := exec.CommandContext(ctx, xmllint(), "--noout", "--stream", "--schema", stressSchema, "-")
 	cmd.Dir = filepath.Dir(schema)
 	cmd.Stdin = strings.NewReader(doc)
 	var errBuf strings.Builder
