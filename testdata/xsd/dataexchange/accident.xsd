@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<xsd:schema 
+xmlns:base="http://www.mabisz.hu/dataexchange/base" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mabisz.hu/dataexchange/accident"
+            targetNamespace="http://www.mabisz.hu/dataexchange/accident" elementFormDefault="qualified">
+  <xsd:import schemaLocation="dataexchangebase.xsd" 
+               namespace="http://www.mabisz.hu/dataexchange/base"/>
+  <xsd:element name="accidentRequest">
+    <xsd:annotation>
+      <xsd:documentation>Balesetbiztosítás kérdés</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="insuredPerson" type="base:PersonType">
+          <xsd:annotation>
+            <xsd:documentation>Természetes személy akire a keresés irányul</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="requestId"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="accidentResponse">
+    <xsd:annotation>
+      <xsd:documentation>Balesetbiztosítás válasz</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice>
+        <xsd:element name="error" type="base:ErrorType">
+          <xsd:annotation>
+            <xsd:documentation>hiba</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="accidentResponseData">
+          <xsd:annotation>
+            <xsd:documentation>Balesetbiztosítás káresemények adatai, ha talált</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="accidentClaim" type="accidentClaimsType" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>Balesetbiztosítási káresemény</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:attribute name="requestId"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="accidentClaimsType">
+    <xsd:annotation>
+      <xsd:documentation>Balesetbiztosítás káresemény strukturált adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="accidentClaimstDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="accidentClaimsNum" >
+        <xsd:annotation>
+          <xsd:documentation>Balesetbiztosítási kárszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+       </xsd:element>                                         
+      <xsd:element name="accidentClaimsContact" type="base:ContactType">
+        <xsd:annotation>
+          <xsd:documentation>Baleset biztosítási kontakt személy adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bnoCode" minOccurs="0" >
+        <xsd:annotation>
+          <xsd:documentation>BNO kód</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

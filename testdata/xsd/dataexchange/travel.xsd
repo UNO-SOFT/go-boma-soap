@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<xsd:schema
+xmlns:base="http://www.mabisz.hu/dataexchange/base" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mabisz.hu/dataexchange/travel"
+            targetNamespace="http://www.mabisz.hu/dataexchange/travel" elementFormDefault="qualified">
+            <xsd:import schemaLocation="dataexchangebase.xsd" 
+               namespace="http://www.mabisz.hu/dataexchange/base"/>
+  <xsd:element name="travelRequest">
+    <xsd:annotation>
+      <xsd:documentation>Utasbiztosítási kérdés</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="insuredPerson" type="base:PersonType">
+          <xsd:annotation>
+            <xsd:documentation>Természetes személy, akire a keresés irányul</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="travelClaimsDate" type="xsd:date">
+          <xsd:annotation>
+            <xsd:documentation>Káresemény dátuma</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="requestId"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="travelResponse">
+    <xsd:annotation>
+      <xsd:documentation>Utasbiztosítási válasz</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice>
+        <xsd:element name="error" type="base:ErrorType">
+          <xsd:annotation>
+            <xsd:documentation>Hiba</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="travelResponseData">
+          <xsd:annotation>
+            <xsd:documentation>Utasbiztosítási károk adatai</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="travelClaims" type="TravelClaimsType" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>Utasbiztosítási kár</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:attribute name="requestId"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="TravelClaimsType">
+    <xsd:annotation>
+      <xsd:documentation>Utasbiztosítás kár strukturált adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="travelClaimsDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Kár tényleges dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="travelClaimsNum" >
+        <xsd:annotation>
+          <xsd:documentation>Kárszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="travelClaimsContact" type="base:ContactType">
+        <xsd:annotation>
+          <xsd:documentation>Kontakt személy utasbiztosítás kárral kapcsolatban</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

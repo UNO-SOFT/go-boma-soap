@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.qualysoft.hu/services/schemas/boma/common" targetNamespace="http://www.qualysoft.hu/services/schemas/boma/common" elementFormDefault="qualified">
+  <xs:simpleType name="RequestType">
+    <xs:annotation>
+      <xs:documentation>SOAP kérés típusa</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SEND"/>
+      <xs:enumeration value="CREATE_ROOT_MSG"/>
+      <xs:enumeration value="CREATE_BOMA_MSG"/>
+      <xs:enumeration value="RECEIVE"/>
+      <xs:enumeration value="EXTRACT_ENC_BOMA_MSG"/>
+      <xs:enumeration value="EXTRACT_DEC_BOMA_MSG"/>
+      <xs:enumeration value="EXTRACT_ENC2DEC_BOMA_MSG"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResponseType">
+    <xs:annotation>
+      <xs:documentation>SOPA válasz típusa</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SENT_OK"/>
+      <xs:enumeration value="ROOT_MSG"/>
+      <xs:enumeration value="ENC_BOMA_MSG"/>
+      <xs:enumeration value="DEC_BOMA_MSG"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2009 (http://www.altova.com) by József Leveles (Qualysoft Hungary Zrt.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:basebns="http://www.mabisz.hu/boma" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="bomabase.xsd"/>
+  <xsd:element name="BOMAalert">
+    <xsd:annotation>
+      <xsd:documentation>BOMA alert üzenetek</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="event">
+          <xsd:annotation>
+            <xsd:documentation>Esemény leírása</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="eventDateTime" type="basebns:bomaDateTime">
+                <xsd:annotation>
+                  <xsd:documentation>Esemény időpontja</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="eventLevel" type="xsd:integer" default="1" minOccurs="0"/>
+              <xsd:element name="eventId" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Esemény azonosítója</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="eventSubject">
+                <xsd:annotation>
+                  <xsd:documentation>Az eseményre jellemző kiegészítő információs szöveg.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="128"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="eventText" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Az eseményre jellemző kiegészítő információs szöveg.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="sender">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="program" type="xsd:string"/>
+              <xsd:element name="class" type="xsd:string" minOccurs="0"/>
+              <xsd:element name="detail" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="authorizations">
+    <xsd:annotation>
+      <xsd:documentation>Üzenettovábbitási jogosultságok</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="messagType" minOccurs="0" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Jogosultság üzenet típusonként</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="acl" type="aclType">
+                <xsd:annotation>
+                  <xsd:documentation>Jogosultságok</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="basebns:msgType">
+              <xsd:annotation>
+                <xsd:documentation>Üzenettípus neve</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="messageGroup" minOccurs="0" maxOccurs="unbounded">
+          <xsd:annotation>
+            <xsd:documentation>Jogosultság üzenetcsoportonként</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="messageTypes">
+                <xsd:annotation>
+                  <xsd:documentation>Üzenetek a csoportban</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="messageType" type="basebns:msgType" maxOccurs="unbounded">
+                      <xsd:annotation>
+                        <xsd:documentation>Üzenettípus neve</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="acl" type="aclType">
+                <xsd:annotation>
+                  <xsd:documentation>Jogosultságok</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string">
+              <xsd:annotation>
+                <xsd:documentation>Üzenetcsoport neve</xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="aclType">
+    <xsd:annotation>
+      <xsd:documentation>Jogosultság listák</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="allowedSender" type="basebns:companyCodeType" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Engedélyezett küldő biztosítók</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="allowedReceiver" type="basebns:companyCodeType" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Engedélyezett fogadó biztosítók</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) by Peter Bodo (Qualysoft Zrt.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mabisz.hu/boma/main" xmlns:basebns="http://www.mabisz.hu/boma" targetNamespace="http://www.mabisz.hu/boma/main" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="bomabase.xsd"/>
+  <xsd:element name="bomaRoot" type="ReqRespType">
+    <xsd:annotation>
+      <xsd:documentation>Teljes Kártörténeti/Adatcsere üzenet</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ReqRespType">
+    <xsd:annotation>
+      <xsd:documentation>Általános üzenet típus </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="head" type="basebns:envelopeType">
+        <xsd:annotation>
+          <xsd:documentation>Az üzeneteknek a központ által is értelmezhető címzési és egyéb adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="signatures">
+        <xsd:annotation>
+          <xsd:documentation>Aláírások</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="senderSign">
+              <xsd:annotation>
+                <xsd:documentation>A küldő biztosító aláírása</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="centralSign" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>A BOMA központ aláírása a központból a biztosító felé menő üzenetekben</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="body">
+        <xsd:annotation>
+          <xsd:documentation>Az üzenet adattartalma</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:base64Binary">
+            <xsd:minLength value="5"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="version" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:schema>

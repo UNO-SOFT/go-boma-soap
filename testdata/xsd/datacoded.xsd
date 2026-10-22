@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) by Peter Bodo (Qualysoft Zrt.) -->
+<xsd:schema xmlns="http://www.mabisz.hu/dataexchange/wrapper" xmlns:data="http://www.mabisz.hu/dataexchange/wrapper" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:basebns="http://www.mabisz.hu/boma" targetNamespace="http://www.mabisz.hu/dataexchange/wrapper" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="bomabase.xsd"/>
+  <xsd:complexType name="dataExchangeRequestWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Univerzális adatcsere kérés üzenet típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="originalTargetCode" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Eredeti címzett biztosító aki nincs csatlakozva, email-ben továbbításra kerül az üzenet</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:length value="2"/>
+            <xsd:pattern value="\d{2}"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="wrappedData" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>A kérés üzenet tartalma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="dataExchangeResponseWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Univerzális adacsere válasz üzenet típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="wrappedData" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>A válasz üzenet tartalma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="homeRequestWrapper" type="dataExchangeRequestWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Lakásbiztosítás kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="homeResponseWrapper" type="dataExchangeResponseWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Lakásbiztosítás válasz</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="vehicleRequestWrapper" type="dataExchangeRequestWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármu kötelezo felelosségbiztosítás / CASCO kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="vehicleResponseWrapper" type="dataExchangeResponseWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármu kötelezo felelosségbiztosítás / CASCO válasz</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="travelRequestWrapper" type="dataExchangeRequestWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Utasbiztosítás kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="travelResponseWrapper" type="dataExchangeResponseWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Utasbiztosítás válasz</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="accidRequestWrapper" type="dataExchangeRequestWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Balesetbiztosítás kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="accidResponseWrapper" type="dataExchangeResponseWrapperType">
+    <xsd:annotation>
+      <xsd:documentation>Balesetbiztosítás válasz</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

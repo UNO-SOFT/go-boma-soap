@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mabisz.hu/dataexchange/base"
+         xmlns:basebns="http://www.mabisz.hu/boma"    targetNamespace="http://www.mabisz.hu/dataexchange/base" elementFormDefault="qualified">
+   <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="../bomabase.xsd"/>         
+  <xsd:simpleType name="ErrorCodeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="01">
+        <xsd:annotation>
+          <xsd:documentation>Unsuccesful policyholder identification</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="02">
+        <xsd:annotation>
+          <xsd:documentation>Unsuccesful policy identification</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="03">
+        <xsd:annotation>
+          <xsd:documentation>Unsuccesful claims event identification</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    <xsd:enumeration value="04">
+        <xsd:annotation>
+          <xsd:documentation>Unsuccesful risk place identification</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="PersonType">
+    <xsd:annotation>
+      <xsd:documentation>Természetes személy adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="personName" type="basebns:personNameType">
+        <xsd:annotation>
+          <xsd:documentation>Természetes személy viselt neve</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="personBirthName" type="basebns:personNameType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Természetes személy születéskori neve</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="dateOfBirth" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Természetes személy születési dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="motherMaidenName" type="basebns:personNameType">
+        <xsd:annotation>
+          <xsd:documentation>Természetes személy anyja születési neve</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ContactType">
+    <xsd:annotation>
+      <xsd:documentation>Kontakt személy struktarált adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="contactName" >
+        <xsd:annotation>
+          <xsd:documentation>Kontakt személy neve</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>                                          
+      <xsd:element name="contactEmail" >
+        <xsd:annotation>
+          <xsd:documentation>Kontakt személy emailcíme</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>   
+      
+      <xsd:element name="contactPhone" maxOccurs="3">
+        <xsd:annotation>
+          <xsd:documentation>Kontakt személy telefonszáma(i)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="15"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>   
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LegalEntityType">
+    <xsd:annotation>
+      <xsd:documentation>Jogi személy strukturált adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="legalEntityName">
+        <xsd:annotation>
+          <xsd:documentation>Cég, szervezet megnevezése</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="150"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>            
+      <xsd:element name="taxNumber">
+        <xsd:annotation>
+          <xsd:documentation>Cég, szervezet adószáma</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="100"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>            
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorType">
+    <xsd:annotation>
+      <xsd:documentation>Hibatípus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="errorCode" type="ErrorCodeType">
+        <xsd:annotation>
+          <xsd:documentation>Hibakód</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="errorDescription" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Extra leírás a hibához</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="PolicyCategoryType">
+   <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="mtpl">
+        <xsd:annotation>
+          <xsd:documentation>MTPL</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="casco">
+        <xsd:annotation>
+          <xsd:documentation>CASCO</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+     <xsd:enumeration value="household">
+        <xsd:annotation>
+          <xsd:documentation>Household</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="travel">
+        <xsd:annotation>
+          <xsd:documentation>Travel Insurance</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="accident">
+        <xsd:annotation>
+          <xsd:documentation>Accident isnurance</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

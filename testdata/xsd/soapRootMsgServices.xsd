@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.qualysoft.hu/services/schemas/boma/rootmsgservices" xmlns:basebns="http://www.mabisz.hu/boma" xmlns:soapcommon="http://www.qualysoft.hu/services/schemas/boma/common" targetNamespace="http://www.qualysoft.hu/services/schemas/boma/rootmsgservices" elementFormDefault="qualified">
+  <xs:import namespace="http://www.qualysoft.hu/services/schemas/boma/common" schemaLocation="soapCommon.xsd"/>
+  <xs:import namespace="http://www.mabisz.hu/boma" schemaLocation="../xsd/bomabase.xsd"/>
+  <xs:element name="sendRootMsgRequest">
+    <xs:annotation>
+      <xs:documentation>Teljes üzenet küldése kérés</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="rootMsgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>Teljes üzenet</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sendRootMsgResponse" type="soapcommon:ResponseType">
+    <xs:annotation>
+      <xs:documentation>Teljes üzenet küldése válasz</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="receiveRootMsgRequest">
+    <xs:annotation>
+      <xs:documentation>Teljes üzenet fogadása kérés</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="serviceRequested" type="soapcommon:RequestType">
+          <xs:annotation>
+            <xs:documentation>A kért szolgáltatás típusa</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="receiveRootMsgResponse">
+    <xs:annotation>
+      <xs:documentation>Teljes üzenet fogadása válasz</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="msgHeader" type="basebns:envelopeType"/>
+        <xs:element name="msgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>
+							A fogadott üzenet
+						</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="serviceResponded" type="soapcommon:ResponseType">
+          <xs:annotation>
+            <xs:documentation>
+							A megválaszolt szolgáltatás típusa
+						</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

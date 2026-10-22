@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) by Peter Bodo (Qualysoft Zrt.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma" xmlns:codedbns="http://www.mabisz.hu/boma/coded" xmlns:soapcommon="http://www.qualysoft.hu/services/schemas/boma/common" targetNamespace="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" elementFormDefault="qualified">
+  <xs:import namespace="http://www.qualysoft.hu/services/schemas/boma/common" schemaLocation="soapCommon.xsd"/>
+  <xs:import namespace="http://www.mabisz.hu/boma" schemaLocation="../xsd/bomabase.xsd"/>
+  <xs:import namespace="http://www.mabisz.hu/boma/coded" schemaLocation="../xsd/bomacoded.xsd"/>
+  <xs:element name="sendXmlMultiMsgRequest">
+    <xs:annotation>
+      <xs:documentation>XML formátumú BOMA üzenet küldése kérés</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="targetList" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="targetInsCo" type="basebns:companyCodeType" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>A címzett biztosító</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="sendXmlBomaMsgRequest"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sendXmlMultiMsgResponse">
+    <xs:annotation>
+      <xs:documentation>XML formátumú multi üzenet küldése válasz</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sendXmlBomaMsgResponse" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sendXmlBomaMsgRequest">
+    <xs:annotation>
+      <xs:documentation>XML formátumú BOMA üzenet küldése kérés</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="msgHeader" type="basebns:envelopeType">
+          <xs:annotation>
+            <xs:documentation>Üzenet fejléc</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="encryptionRequired" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>Kódolás szükséges-e ?</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="serviceRequested" type="soapcommon:RequestType">
+          <xs:annotation>
+            <xs:documentation>SOAP kérés azonosítója</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="msgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>BOMA üzenet adat</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sendXmlBomaMsgResponse">
+    <xs:annotation>
+      <xs:documentation>XML formátumú BOMA üzenet küldése válasz</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="msgHeader" type="basebns:envelopeType">
+          <xs:annotation>
+            <xs:documentation>Üzenet fejléc</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="serviceResponded" type="soapcommon:ResponseType">
+          <xs:annotation>
+            <xs:documentation>SOAP kérés azonosítója</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="encryptedKey" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>Az üzenetet titkosító szimmmetrikus kulcs</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="msgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>BOMA üzenet adat</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="generateUuidRequest">
+    <xs:annotation>
+      <xs:documentation>Egyedi azonosító generálása kérés</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="generateUuidResponse" type="basebns:msgIdType">
+    <xs:annotation>
+      <xs:documentation>Egyedi azonosító generálása válasz</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="extractXmlBomaMsgRequest">
+    <xs:annotation>
+      <xs:documentation>BOMA üzenet kibontása XML formátumba kérés</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="msgTypeName" type="basebns:msgType">
+          <xs:annotation>
+            <xs:documentation>Üzenet típus</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="serviceRequested" type="soapcommon:RequestType">
+          <xs:annotation>
+            <xs:documentation>SOAP kérés azonosítója</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="encryptedKey" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>Az üzenetet titkosító szimmmetrikus kulcs</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="msgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>Üzenet adat</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="extractXmlBomaMsgResponse">
+    <xs:annotation>
+      <xs:documentation>BOMA üzenet kibontása XML formátumba válasz</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="msgHeader" type="basebns:envelopeType"/>
+        <xs:element name="msgData" type="xs:base64Binary">
+          <xs:annotation>
+            <xs:documentation>
+							Kibontott üzenet adat
+						</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="serviceResponded" type="soapcommon:ResponseType">
+          <xs:annotation>
+            <xs:documentation>
+							SOAP kérés azonosítója
+						</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

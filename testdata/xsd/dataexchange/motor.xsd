@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<xsd:schema
+xmlns:base="http://www.mabisz.hu/dataexchange/base" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.mabisz.hu/dataexchange/motor"
+            targetNamespace="http://www.mabisz.hu/dataexchange/motor" elementFormDefault="qualified">
+    <xsd:import schemaLocation="dataexchangebase.xsd" 
+               namespace="http://www.mabisz.hu/dataexchange/base"/>
+  <xsd:element name="motorRequest" type="MotorRequestType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármű biztosítási kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="motorResponse">
+    <xsd:annotation>
+      <xsd:documentation>Gépjárműbiztosítás válasz</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice>
+        <xsd:element name="error" type="base:ErrorType">
+          <xsd:annotation>
+            <xsd:documentation>Hiba</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="motorResponseData">
+          <xsd:annotation>
+            <xsd:documentation>Gépjárműbiztosítás válasz adatai, ha talált</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="motorclaims" type="MotorClaimsType" maxOccurs="unbounded">
+                <xsd:annotation>
+                  <xsd:documentation>Gépjárműbiztosítás kár</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:attribute name="requestId"/>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="MotorRequestType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjárműbiztosítási kérés adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="vehicleIdentification">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű azonosító adata</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:choice>
+            <xsd:element name="vehicleBodyRegNo" >
+              <xsd:annotation>
+                <xsd:documentation>Alvázszám</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="30"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="licencePlate" >
+              <xsd:annotation>
+                <xsd:documentation>Rendszám</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="requestId"/>
+  </xsd:complexType>
+  <xsd:complexType name="MotorClaimsType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjárműkár strukturált adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="policyCategory" type="base:PolicyCategoryType">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási szerződés kategóriája</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="claimsPosition">
+        <xsd:annotation>
+          <xsd:documentation>Kárpozició</xsd:documentation>
+        </xsd:annotation>
+         <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="50"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="motorClaimsNum" >
+        <xsd:annotation>
+          <xsd:documentation>Kárszám</xsd:documentation>
+        </xsd:annotation>
+         <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="20"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="motorClaimsDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageType">
+        <xsd:annotation>
+          <xsd:documentation>Sérülés típusa</xsd:documentation>
+        </xsd:annotation>
+         <xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="50"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="claimsAmount" type="xsd:nonNegativeInteger">
+        <xsd:annotation>
+          <xsd:documentation>Kárösszeg</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="claimsContact" type="base:ContactType">
+        <xsd:annotation>
+          <xsd:documentation>Gépjárműbiztosítás kár kontakt személy</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

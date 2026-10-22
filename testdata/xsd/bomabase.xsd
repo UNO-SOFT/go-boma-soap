@@ -1,0 +1,3021 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp1 (http://www.altova.com) by Peter Bodo (Qualysoft Zrt.) -->
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xsd:schema xmlns="http://www.mabisz.hu/boma" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mabisz.hu/boma" elementFormDefault="qualified">
+  <xsd:simpleType name="companyCodeType">
+    <xsd:annotation>
+      <xsd:documentation>A biztosítókat azonosító kód, amelyek csatlakozva vannak a rendszerhez</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="00">
+        <xsd:annotation>
+          <xsd:documentation>
+              MABISZ
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="01">
+        <xsd:annotation>
+          <xsd:documentation>
+              GENERALI
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="02">
+        <xsd:annotation>
+          <xsd:documentation>
+              AEGON
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="03">
+        <xsd:annotation>
+          <xsd:documentation>
+              UNIQA
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="04">
+        <xsd:annotation>
+          <xsd:documentation>
+              GROUPAMA-GARANCIA
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="05">
+        <xsd:annotation>
+          <xsd:documentation>
+              ALLIANZ
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="07">
+        <xsd:annotation>
+          <xsd:documentation>K&amp;H</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="08">
+        <xsd:annotation>
+          <xsd:documentation>
+              KOBE
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:documentation>
+              UNION
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:documentation>
+              MAV ABE
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:documentation>
+              MPB
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:documentation>
+              SIGNAL
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="18">
+        <xsd:annotation>
+          <xsd:documentation>
+              GENERTEL
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="19">
+        <xsd:annotation>
+          <xsd:documentation>
+              MKB AB
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="20">
+        <xsd:annotation>
+          <xsd:documentation>WÁBERER HUNGÁRIA BIZTOSÍTÓ ZRT
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:documentation>
+              AIM
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:documentation>
+              ASTRA
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:documentation>CIG</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="40">
+        <xsd:annotation>
+          <xsd:documentation>EUB</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="41">
+        <xsd:annotation>
+          <xsd:documentation>Porsche</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="42">
+        <xsd:annotation>
+          <xsd:documentation>QBE</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="43">
+        <xsd:annotation>
+          <xsd:documentation>Metlife</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="60">
+        <xsd:annotation>
+          <xsd:documentation>MABISZ-GKI</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="87">
+        <xsd:annotation>
+          <xsd:documentation>Adatcsere email module</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="88">
+        <xsd:annotation>
+          <xsd:documentation>Interfész modul</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="89">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="98">
+        <xsd:annotation>
+          <xsd:documentation>
+              OMEGA (TESZT)
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="99">
+        <xsd:annotation>
+          <xsd:documentation>
+              ALFA (TESZT)
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BMCodeType">
+    <xsd:annotation>
+      <xsd:documentation>Bonus-malus kategóriák</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="B01"/>
+      <xsd:enumeration value="B02"/>
+      <xsd:enumeration value="B03"/>
+      <xsd:enumeration value="B04"/>
+      <xsd:enumeration value="B05"/>
+      <xsd:enumeration value="B06"/>
+      <xsd:enumeration value="B07"/>
+      <xsd:enumeration value="B08"/>
+      <xsd:enumeration value="B09"/>
+      <xsd:enumeration value="B10"/>
+      <xsd:enumeration value="A00"/>
+      <xsd:enumeration value="M01"/>
+      <xsd:enumeration value="M02"/>
+      <xsd:enumeration value="M03"/>
+      <xsd:enumeration value="M04"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="reasonOfRequestType">
+    <xsd:annotation>
+      <xsd:documentation>A kártörténeti kérést kiváltó üzleti igény</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="01">
+        <xsd:annotation>
+          <xsd:documentation>
+              Changing insurance company at the end of insurance year
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="02">
+        <xsd:annotation>
+          <xsd:documentation>
+              underwriting new policy 
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="03">
+        <xsd:annotation>
+          <xsd:documentation>
+              Transfer B/M grade to an existing policy
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="04">
+        <xsd:annotation>
+          <xsd:documentation>
+              Request for unreported claims
+            </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="10">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás korábbi szerződéskötésről: amennyiben már van a rendszerben későbbi szerződésdátumú szerződés és új bejelentés történik, akkor erről automatikus figyelmeztetés megy az érintett másik biztosítónak is. Nem „bónuszbesorolt” kötvények esetében is megy automatikus üzenet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="11">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás káreseményről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:documentation>Időzített automatikus kártörténeti igazolás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás előzmény kötvény adatainak módosításáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:documentation>Tevékenységi engedély visszavonásával érintett biztosító tájékoztatása szerződésének állapotáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="15">
+        <xsd:annotation>
+          <xsd:documentation>Értesítés törölt vagy befoglalt kötvényre történő szüneteltetésről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16">
+        <xsd:annotation>
+          <xsd:documentation>Értesítés B/M besorolás hiányáró a kockázatviselés kezdete + 30 nap után </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:documentation>Értesítés B/M besorolás hiányáró a kockázatviselés kezdete + 75 nap után </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:documentation>Új szerződés kötéséhez</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:documentation>Meglévő szerződés megújításához</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus fokozat átviteléhez meglévő szerződésre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="24">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő által kezdeményezett lekérdezés (Ügyfélkapun keresztül)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="25">
+        <xsd:annotation>
+          <xsd:documentation>Egyéb, jogszabály által szabályozott jogosultság alapján</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="30">
+        <xsd:annotation>
+          <xsd:documentation>Azonosítás tájékoztató üzenet okán</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="31">
+        <xsd:annotation>
+          <xsd:documentation>Azonosítás Kártörténet lekérdezés okán</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="32">
+        <xsd:annotation>
+          <xsd:documentation>Azonosítás migrációs betöltés okán</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="40">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás adatmigráció okán</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="41">
+        <xsd:annotation>
+          <xsd:documentation>Adatmódosítás a kötvényt lejelentő biztosító társaság meghatalmazása alapján</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="resultOfRequestType">
+    <xsd:annotation>
+      <xsd:documentation>A kártörténeti kérés sikeressége ("00"), vagy hibaok ("nn")</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="00">
+        <xsd:annotation>
+          <xsd:documentation>A kért szolgáltatás sikeresen teljesítve</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="10">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott Szerződő nem létezik</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="11">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatok alapján a Szerződő azonosítása sikertelen</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:documentation>Adott Biztosítónál már létezik az adott kötvényszám</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:documentation>Már korábban felhasznált kötvényre történő hivatkozás (B/M fokozat átvitele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény nem a kapcsolódó Szerződőhöz tartozik,vagy TT-vel törölt és a két szerződő között jogutódlási kapcsolat sincs bejelentve (B/M fokozat átvitele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="15">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény nem Megszüntetett állapotú (B/M fokozat átvitele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény nem megfelelő gépjármű kategóriához tartozik. (B/M fokozat átvitele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény nem létezik az adott Szerződőnél, vagy TT-vel törölt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="18">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény két évnél régebben lett lezárva (B/M fokozat átvétele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="19">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott internal_id nem a megadott kötvényhez tartozik (B/M fokozat átvétele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="20">
+        <xsd:annotation>
+          <xsd:documentation>A kötvény nem a küldő Biztosítóhoz tartozik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:documentation>A kötvény állapota nem megfelelő.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés indításának dátuma nagyobb, mint a feldolgozás dátuma.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés lezárásának dátuma nagyobb, mint a feldolgozás dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="24">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés lezárásának dátuma kisebb, mint a szüneteltetés indításának dátuma.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="25">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének dátuma nagyobb, mint a feldolgozás dátuma.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="26">
+        <xsd:annotation>
+          <xsd:documentation>A megszüntetés dátumán a kötvény még nem érvényes.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="27">
+        <xsd:annotation>
+          <xsd:documentation>Megszüntetéshez kapcsolódó adatok, csak Megszűnt kötvény esetén módosíthatóak.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="28">
+        <xsd:annotation>
+          <xsd:documentation>A reaktiválandó kötvény már kárelőzményként felhasználásra került.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="29">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő a módosított adatokkal külső nyilvántartásban nem azonosítható (amennyiben a megváltozott adatok alapján külső nyilvántartásból azonosíthatónak kellene lennie a Szerződőnek)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="30">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai nem módosíthatóak (Külső nyilvántartás alapján azonosított Szerződő)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="31">
+        <xsd:annotation>
+          <xsd:documentation>Adott Biztosítónak nincs joga a Szerződő adatait módosítani (Nincs a hivatkozott Szerződőnél kötvénye.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="32">
+        <xsd:annotation>
+          <xsd:documentation>Kártérítés egyéb kötelezettje attribútum megadása nem engedélyezett.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="33">
+        <xsd:annotation>
+          <xsd:documentation>Megadott kárszámmal már létezik káresemény a Szerződőnél.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="34">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény dátuma / Kötelezettség ismertté válásának dátuma / Kifizetett kárösszeg visszafizetésének dátuma nem lehet későbbi, mint a feldolgozás dátuma.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="35">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény dátuma nem lehet későbbi, mint a Kötelezettség ismertté válásának dátuma / Kifizetett kárösszeg visszafizetésének dátuma.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="36">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény nem létezik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="37">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény nem az adott kötvényhez tartozik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="38">
+        <xsd:annotation>
+          <xsd:documentation>Megadott nyugta azonosító nem létezik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="39">
+        <xsd:annotation>
+          <xsd:documentation>A megad nyugta azonosító nem megfelelő típusú üzenethez tartozik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="40">
+        <xsd:annotation>
+          <xsd:documentation>A megad nyugta azonosító nem a megadott Biztosítóhoz tartozik.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="41">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény nem létezik a Nyilvántartásban, vagy TT-vel törölt vagy nem bónuszbesorolt állapotban van.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="42">
+        <xsd:annotation>
+          <xsd:documentation>A kötvényről adat nem adható ki, mivel kárelőzményként már felhasználásra került!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="43">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény megszűnésének oka DNF, és a biztosítási időszak vége dátuma nagyobb, mint az új kötvény kockázatviselés kezdő dátuma. (B/M fokozat átvitele).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="44">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény típusa Külföldi kárelőzmény, de nem küldő Biztosítóhoz tartozik. (B/M fokozat átvitele).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="45">
+        <xsd:annotation>
+          <xsd:documentation>NEM HASZNÁLT!
+A megadott gépjárműre a Szerződő a kockázat viselés kezdete dátumán már rendelkezik élő biztosítási szerződéssel.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="46">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete nem lehet későbbi, mint az érintett kötvény kockázatviselés kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="47">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete nem lehet későbbi, mint a Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="48">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége nem lehet későbbi, mint az érintett kötvény kockázatviselés kezdete.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="49">
+        <xsd:annotation>
+          <xsd:documentation>A szüneteltetés kezdetének megadott dátumakor a kötvény még nem érvényes</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="50">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés vége dátuma nagyobb, mnint a kockázatviselés vége dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="51">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés időszaka másik szüneteltetési időszakkal ütközik</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="52">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal rendelkező személy nem szerepel SZL-ben. (SZL 1101 hiba)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="53">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal több személy is rendelkezik SZL-ben. (SZL 1102 hiba)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="54">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal rendelkező személy adatai nem adhatóak vissza. (SZL 1501 hiba.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="55">
+        <xsd:annotation>
+          <xsd:documentation>A SZL-ból technikai okok miatt jelenleg az adatszolgáltatás elektronikus úton nem teljesíthető. Kérjük, próbálja meg újra! (SZL 5001 hiba vagy időtúllépés)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="56">
+        <xsd:annotation>
+          <xsd:documentation>Lezárt (törölt) kötvény estén kötelező megadni a törlés okát és dátumát(riskSharingTermCause, riskSharingTermDate)!"</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="57">
+        <xsd:annotation>
+          <xsd:documentation>A kartorteneti igazolas merete miatt nem adhato ki. Forduljon a rendszer uzemeltetohoz!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="58">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Élő kötvény azonos kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="59">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Törölt kötvény azonos kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="60">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Élő kötvény későbbi kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="61">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Törölt kötvény későbbi kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="62">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Élő kötvény korábbi kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="63">
+        <xsd:annotation>
+          <xsd:documentation>A kockázat viselés időszaka ütközik a Szerződő megadott gépjárműjére létező másik kötvény kockázatviselési időszakával. Ütközés típusa: Törölt kötvény korábbi kockázatviselés kezdeti dátummal.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="64">
+        <xsd:annotation>
+          <xsd:documentation>A kötvényről adat nem adható ki, mivel nem a lekérdező biztosítóhoz tartozik és élő állapotú!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="65">
+        <xsd:annotation>
+          <xsd:documentation>Párhuzamos üzemeltetés esetén csak Érdekmúlás miatt törölt kötvény használható fel kárelőzményként.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="66">
+        <xsd:annotation>
+          <xsd:documentation>DNF miatt megszűnt kötvény csak azonos gépjárműhöz (alvázszám) használható fel kárelőzményként!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="67">
+        <xsd:annotation>
+          <xsd:documentation>Az érintett attibútum megadott aktuális értéke nem egyezik meg a nyilvántartásban tárolt értékkel (kötvény technikai módosítás)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="68">
+        <xsd:annotation>
+          <xsd:documentation>NEM HASZNÁLT! Felmondással, vagy Közös megegyezéssel törölt előzmény kötvény BM fokozata csak azonos gépjárműre vihető át. (Évfordulós váltás.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="69">
+        <xsd:annotation>
+          <xsd:documentation>Migrációs eljárás során beküldött kötvény (InformLatePolicy) nem újranyitható!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="70">
+        <xsd:annotation>
+          <xsd:documentation>A megadott kockázatviselési időszakra migrációs kötvény bejelentés (InformLatePolicy) nem engedélyezett!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="71">
+        <xsd:annotation>
+          <xsd:documentation>Jogutódlási kapcsolat nem törölhető (a jogutódlási kapcsolatra épülő kárelőzmény megadásokat törölni kell a jogutódlási kapcsolat törlése előtt)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="72">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő megváltoztatása nem lehetséges, mert nincs bejelentve jogutódlási kapcsolat az aktuális szerződő és a megadott új szerződő között</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="73">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő megváltoztatása nem lehetséges, mert nincs bejelentve jogutódlási kapcsolat a megadott új szerződő és a kárelőzmény kötvény szerződője között</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="75">
+        <xsd:annotation>
+          <xsd:documentation>A megadott szerződéskötés dátumához képest létezik a rendszerben korábbi szerződéskötési dátumú Kötvény azonos kockázatviselést kezdettel, azonos szerződőre és járműre.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="76">
+        <xsd:annotation>
+          <xsd:documentation>A besorolás alapja új belépő/párhuzamos üzemeltető/gépjármű kategória nem része a B/M rendszernek és előzménykötvény került megadásra</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="77">
+        <xsd:annotation>
+          <xsd:documentation>A besorolás alapja meglévő szerződés és nincs megadva előzménykötvény</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="78">
+        <xsd:annotation>
+          <xsd:documentation>Ha a besorolás alapja új belépő/párhuzamos üzemeltető/gépjármű kategória nem része a B/M rendszernek, akkor a megadott besorolás csak A00 lehet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="79">
+        <xsd:annotation>
+          <xsd:documentation>A Szerződő nem felel meg a megadott besorolás alapjának</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="80">
+        <xsd:annotation>
+          <xsd:documentation>A kötvény nem „bónusz besorolt” állapotban van</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="81">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény megszűnésének oka DNF, amelynek a biztosítási időszaka még nem járt le, ezért csak a megszüntető biztosítónál lehet előzményként felhasználni (B/M fokozat átvitele)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="82">
+        <xsd:annotation>
+          <xsd:documentation>A sérült jármű már lejelentésre került a káreseményhez</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="83">
+        <xsd:annotation>
+          <xsd:documentation>A megadott sérült gépjármű nem szerepel a nyilvántartásban az adott kárszámhoz</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="84">
+        <xsd:annotation>
+          <xsd:documentation>A hivatkozott kötvény ideiglenes rendszámos kötvény</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="85">
+        <xsd:annotation>
+          <xsd:documentation>Csak ideiglenes rendszámos kötvények esetén adható meg a rendszámkiadás éve</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="86">
+        <xsd:annotation>
+          <xsd:documentation>Csak ideiglenes rendszámos kötvények esetén hagyható el a gépjármű kategória vagy gyártmány</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="90">
+        <xsd:annotation>
+          <xsd:documentation>Blocked repeated request</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="91">
+        <xsd:annotation>
+          <xsd:documentation>Undeliverable message</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="92">
+        <xsd:annotation>
+          <xsd:documentation>@Deprecated(kompotibilitasi okokbol maradt) Message lost in disaster</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="93">
+        <xsd:annotation>
+          <xsd:documentation>Hibás üzenet (technikai hiba, séma eltérés)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="94">
+        <xsd:annotation>
+          <xsd:documentation>Küldésre nem jogosult</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="95">
+        <xsd:annotation>
+          <xsd:documentation>Fogadásra nem jogosult</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="98">
+        <xsd:annotation>
+          <xsd:documentation>Túl nagy XML</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="99">
+        <xsd:annotation>
+          <xsd:documentation>A feldolgozás során váratlan technikai hiba lépett fel, kérjük értesítse a rendszer üzemeltetőit!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="envelopeType">
+    <xsd:annotation>
+      <xsd:documentation>Boriték fejléc</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="msgTypeName" type="msgType">
+        <xsd:annotation>
+          <xsd:documentation>Üzenet típusa</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="senderInsCo" type="companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy Kártörténeti központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="messageId" type="msgIdType">
+        <xsd:annotation>
+          <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="referenceId" type="msgIdType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott üzenet azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="highPriorityRequest" type="xsd:boolean" default="false" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést illetve üzenetet kiváltó üzleti ok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultCode" type="resultOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="messageDateTime" type="bomaDateTime">
+        <xsd:annotation>
+          <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="requestersId" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="msgHash" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>@Deprecated - nem használt
+Az üzenet fő jellemzőiből képzett, azonosításra alkalmas hash</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="encryptedKey" type="xsd:base64Binary">
+        <xsd:annotation>
+          <xsd:documentation>Az üzenetet titkosító szimmmetrikus kulcs titkosítva</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="msgType">
+    <xsd:annotation>
+      <xsd:documentation>A Kártörténeti/Adatcsere üzenet típusa</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="HOME_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Lakásbiztosítás kérés (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HOME_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Lakásbiztosítás válasz (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="VEHICLE_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármu kötelezo felelosségbiztosítás / CASCO kérés (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="VEHICLE_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármu kötelezo felelosségbiztosítás / CASCO válasz (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TRAVEL_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Utasbiztosítás kérés (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TRAVEL_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Utasbiztosítás válasz (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ACCID_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Balesetbiztosítás kérés (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ACCID_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Balesetbiztosítás válasz (Adatcsere)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HEARTBEAT">
+        <xsd:annotation>
+          <xsd:documentation>Életjel</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvényesítésről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_BM_RATING">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás B/M besorolásról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_RECALL_BM_RATING">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás B/M besorolás törléséről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CHANGE_BM_RATING">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás B/M besorolás módosításáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_RENEW_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvény (biztosítási időszak) megújításáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_START_PAUSE">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvény szüneteltetésének indításáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CLOSE_PAUSE">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvény szüneteltetésének lezárásáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_TERM_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvény megszüntetéséről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CHANGE_POLICYNO">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvényszám megváltozásáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_REOPEN_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás megszüntetett kötvény élesztéséről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CHANGE_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás kötvény leíró adatainak megváltoztatásáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CHANGE_CONTRACTOR">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás Szerződő adatainak megváltoztatásáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_DAMAGE">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás új káreseményről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_CHANGE_DAMAGE">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás káresemény adatainak módosításáról</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_CONTRACTOR">
+        <xsd:annotation>
+          <xsd:documentation>Új szerződő bejelentése, a Kártörténeti Nyilvántartásba kötvény bejelentés céljából</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_SUCCEEDING_EVENT">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás jogi személyek jogutódlási eseményéről </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_REASSIGN_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás szerződő megváltoztatásárol. Csak legal entity szerződők esetén használható!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_TEMP_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás ideiglenes rendszámra vonatkozó kötvényről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_NEW_DAMAGED_VEHICLE">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás károsult gépjárműről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_REQ_BYPOLICY">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti igazolás lekérdezése kötvényre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_REQ_BYCONTR">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti kötvények lekérdezése szerződőre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_LIST_BYCONTR">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti kötvények listája szerződőre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_DATA_REQ_BYCONTR">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti adatok lekérdezése szerződőre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_DATA_BYCONTR">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti adatok listája szerződőre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="DAMAGE_HIST_RESPONSE">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti igazolás válasz</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RECALL_POLICY_EVENT">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztató üzenet visszavonása</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_RESPONSE">
+        <xsd:annotation>
+          <xsd:documentation>Rendszer válasza tájékoztató üzenetre</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="EVNT_DAMAGE_HIST">
+        <xsd:annotation>
+          <xsd:documentation>Tájékoztatás káreseményről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CONTR_IDENT_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő azonosítása kérés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CONTR_IDENT_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő azonosítása válasz</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LEGAL_ENT_IDENT_REQ">
+        <xsd:annotation>
+          <xsd:documentation>Jogi személy azonosítás kérés bizotsító társaságok részére</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LEGAL_ENT_IDENT_RESP">
+        <xsd:annotation>
+          <xsd:documentation>Jogi személy azonosítás válasz bizotsító társaságok részére</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USABLE_POLICIES_REQ_BYCONTR"/>
+      <xsd:enumeration value="USABLE_POLICIES_RESPONSE"/>
+      <xsd:enumeration value="POLICY_TECHNICAL_UPDATE">
+        <xsd:annotation>
+          <xsd:documentation>Technikai állomány javító üzenet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="INF_LATE_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Utólagos, migrációs célú tájékoztatás kötvényesítésről</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CONTR_DATA_REQ_BYUID">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adat lekérdezés internal UID alapján</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CONTR_DATA_RESPONSE">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatlekérdezésre válasz </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="msgIdType">
+    <xsd:annotation>
+      <xsd:documentation>Üzenet azonosítók típusa</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="36"/>
+      <xsd:minLength value="10"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="bomaDateTime">
+    <xsd:annotation>
+      <xsd:documentation>Általános dateTime formátum: dátum+óra,perc,másodperc, milliszekundum</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:dateTime">
+      <xsd:pattern value="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,})?([\+\-]\d{2}:\d{2})?"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="contractorInternalUidType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12"/>
+      <xsd:pattern value="1(1|2)(\p{N})*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="policyInternalUidType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződés egyedi kártörténeti belső azonosító</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12"/>
+      <xsd:pattern value="2(1|2|3|4)(\p{N})*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="damageInternalUidType">
+    <xsd:annotation>
+      <xsd:documentation>Káresemény egyedi kártörténeti belső azonosító</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12"/>
+      <xsd:pattern value="3(\p{N})*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="pauseInternalUidType">
+    <xsd:annotation>
+      <xsd:documentation>Szüneteltetés egyedi kártörténeti belső azonosító</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="12"/>
+      <xsd:pattern value="4(\p{N})*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="vehicleLegalClassType">
+    <xsd:annotation>
+      <xsd:documentation>20/2009. (X. 9.) PM rendelet 1.§ 2. bekezdése alapján a járműkategóriák</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="101">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik 37 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="102">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik  38 kW-tól 50 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="103">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik 51 kW-tól 70 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="104">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik 71 kW-tól 100 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="105">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik 101 kW-tól 180 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="106">
+        <xsd:annotation>
+          <xsd:documentation>Személygépkocsik 180 kW teljesítmény felett</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="201">
+        <xsd:annotation>
+          <xsd:documentation>Motorkerékpárok 12 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="202">
+        <xsd:annotation>
+          <xsd:documentation>Motorkerékpárok 13 kW-tól 35 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="203">
+        <xsd:annotation>
+          <xsd:documentation>Motorkerékpárok 36 kW-tól 70 kW teljesítményig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="204">
+        <xsd:annotation>
+          <xsd:documentation>Motorkerékpárok 70 kW teljesítmény felett</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="301">
+        <xsd:annotation>
+          <xsd:documentation>Autóbuszok 10-tõl 19 férőhelyig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="302">
+        <xsd:annotation>
+          <xsd:documentation>Autóbuszok 20-tól 42 férőhelyig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="303">
+        <xsd:annotation>
+          <xsd:documentation>Autóbuszok 43-tól 79 férőhelyig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="304">
+        <xsd:annotation>
+          <xsd:documentation>Autóbuszok 80 férőhelytől</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="400">
+        <xsd:annotation>
+          <xsd:documentation>Trolibusz</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="501">
+        <xsd:annotation>
+          <xsd:documentation>Tehergépkocsik 3,5 t megengedett legnagyobb össztömegig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="502">
+        <xsd:annotation>
+          <xsd:documentation>Tehergépkocsik 3,5 t megengedett össztömeg felett 12 t megengedett legnagyobb össztömegig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="503">
+        <xsd:annotation>
+          <xsd:documentation>Tehergépkocsik 12 t megengedett legnagyobb össztömeg felett</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="600">
+        <xsd:annotation>
+          <xsd:documentation>Vontatók</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="701">
+        <xsd:annotation>
+          <xsd:documentation>Pótkocsik, félpótkocsik 0,75 t megengedett legnagyobb össztömegig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="702">
+        <xsd:annotation>
+          <xsd:documentation>Pótkocsik, félpótkocsik 0,75 t megengedett össztömeg felett 10 t megengedett legnagyobb össztömegig</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="703">
+        <xsd:annotation>
+          <xsd:documentation>Pótkocsik, félpótkocsik 10 t megengedett legnagyobb össztömeg felett</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="800">
+        <xsd:annotation>
+          <xsd:documentation>Mezőgazdasági vontatók</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="900">
+        <xsd:annotation>
+          <xsd:documentation>Lassú járművek</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1000">
+        <xsd:annotation>
+          <xsd:documentation>Munkagépek </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1100">
+        <xsd:annotation>
+          <xsd:documentation>Segédmotoros kerékpárok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1200">
+        <xsd:annotation>
+          <xsd:documentation>Négykerekű segédmotoros kerékpárok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1300">
+        <xsd:annotation>
+          <xsd:documentation>Egyéb gépjárművek</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="9999">
+        <xsd:annotation>
+          <xsd:documentation>Technikai: nem meghatározható típus</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="riskSharingTermCauseType">
+    <xsd:annotation>
+      <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="DN">
+        <xsd:annotation>
+          <xsd:documentation>Díj nemfizetés miatti megszűnés </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="EM">
+        <xsd:annotation>
+          <xsd:documentation>Érdekmúlás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FE">
+        <xsd:annotation>
+          <xsd:documentation>Felmondás </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FK">
+        <xsd:annotation>
+          <xsd:documentation>Forgalomból való kivonás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LP">
+        <xsd:annotation>
+          <xsd:documentation>Megszűnés lopás miatt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="KM">
+        <xsd:annotation>
+          <xsd:documentation>Megszűnés közös megegyezéssel </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="AA">
+        <xsd:annotation>
+          <xsd:documentation>Állomány átruházás miatt</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TE">
+        <xsd:annotation>
+          <xsd:documentation>Törlés egyéb okból</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TT">
+        <xsd:annotation>
+          <xsd:documentation>Technikai törlés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TV">
+        <xsd:annotation>
+          <xsd:documentation>Tevékenységi engedély visszavont </xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="bmRatingTypeType">
+    <xsd:annotation>
+      <xsd:documentation>BM besorolás típusa</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="PREV">
+        <xsd:annotation>
+          <xsd:documentation>Előzetes (szerződő nyilatkozata alapján)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CHECKED">
+        <xsd:annotation>
+          <xsd:documentation>Ellenőrzött (kártörténeti igazolás alapján)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CALCULATED">
+        <xsd:annotation>
+          <xsd:documentation>Kalkulált (külföldi kárelőzmény esetén jelentése: kárelőzmény igazolás alapján megállapított.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TECHNICAL">
+        <xsd:annotation>
+          <xsd:documentation>Technikai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NON_BM_CATEGORY">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű kategória nem tagja a B/M rendszernek</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TEMPORARY">
+        <xsd:annotation>
+          <xsd:documentation>Ideiglenes</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="contractorStateType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő státusza</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="01">
+        <xsd:annotation>
+          <xsd:documentation>Új belépő</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="02">
+        <xsd:annotation>
+          <xsd:documentation>Meglévő Szerződő átvezethető szerződéssel</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="03">
+        <xsd:annotation>
+          <xsd:documentation>Meglévő Szerződő élő szerződéssel</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="04">
+        <xsd:annotation>
+          <xsd:documentation>Meglévő Szerződő</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="policyNoType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény száma</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="20"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="resultOfIdentifyType">
+    <xsd:annotation>
+      <xsd:documentation>Azonosítás eredménye</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="00">
+        <xsd:annotation>
+          <xsd:documentation>Sikeres</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="01">
+        <xsd:annotation>
+          <xsd:documentation>Külső nyilvántartásban nem azonosítható alany</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="10">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott Szerződő nem létezik</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="30">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai nem módosíthatóak (Külső nyilvántartás alapján azonosított Szerződő)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="31">
+        <xsd:annotation>
+          <xsd:documentation>Adott Biztosítónak nincs joga a Szerződő adatait módosítani (Nincs a hivatkozott Szerződőnél kötvénye.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1101">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal rendelkező személy nem szerepel SZL-ben. (SZL 1101 hiba)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1102">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal több személy is rendelkezik SZL-ben. (SZL 1102 hiba)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="1501">
+        <xsd:annotation>
+          <xsd:documentation>A megadott adatokkal rendelkező személy adatai nem adhatóak vissza. (SZL 1501 hiba.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5001">
+        <xsd:annotation>
+          <xsd:documentation>A SZL-ból technikai okok miatt jelenleg az adatszolgáltatás elektronikus úton nem teljesíthető. Kérjük, próbálja meg újra! (SZL 5001 hiba.)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="80">
+        <xsd:annotation>
+          <xsd:documentation>Sikertelen</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="81">
+        <xsd:annotation>
+          <xsd:documentation>Technikai hiba</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="82">
+        <xsd:annotation>
+          <xsd:documentation>Időtúllépés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="93">
+        <xsd:annotation>
+          <xsd:documentation>Hibás üzenet (technikai hiba, séma eltérés)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="99">
+        <xsd:annotation>
+          <xsd:documentation>Adatbázis technikai hiba!</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="personNameType">
+    <xsd:annotation>
+      <xsd:documentation>Természetes személy név típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="title" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Titulus</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="lastName">
+        <xsd:annotation>
+          <xsd:documentation>Családi név</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="firstName1">
+        <xsd:annotation>
+          <xsd:documentation>Utónév 1</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="25"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="firstName2" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Utónév 2</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="25"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="abstractAddressType" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation>Cím típus, amennyiben struktúráltan nem áll rendelkezésre, úgy az Egyéb cím adat mezőt szükséges tölteni</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="otherAddressType">
+    <xsd:annotation>
+      <xsd:documentation>Nem struktúrált cím adat típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="abstractAddressType">
+        <xsd:sequence>
+          <xsd:element name="otherAddressData">
+            <xsd:annotation>
+              <xsd:documentation>Nem struktúrált cím adat</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="500"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="structuredAddressType">
+    <xsd:annotation>
+      <xsd:documentation>Struktúrált cím típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="abstractAddressType">
+        <xsd:sequence>
+          <xsd:element name="country" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Ország</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="50"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="zipCode" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Irányítószám</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="province" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Tartomány (külföldi cím esetén)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="30"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="city">
+            <xsd:annotation>
+              <xsd:documentation>Település név</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="50"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="district" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kerület</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="publicPlaceName" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Közterület neve</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="publicPlaceType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Közterület jellege</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="streetNumber" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Házszám</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="13"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="building" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Épület</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="stairway" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Lépcsőház</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="floor" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Emelet</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="door" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Ajtó</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="10"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="supplAddress" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Egyéb cím adat. SZL külföldi cím esetén a Lakascim, cégek esetén az Utca mező, szervezetek esetén Cim mező</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="abstractContractorType" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő (Természetes személy vagy jogi személy)</xsd:documentation>
+    </xsd:annotation>
+  </xsd:complexType>
+  <xsd:complexType name="simplePersonType">
+    <xsd:annotation>
+      <xsd:documentation>Természetes személy cím nélkül</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="abstractContractorType">
+        <xsd:sequence>
+          <xsd:element name="personName" type="personNameType">
+            <xsd:annotation>
+              <xsd:documentation>Szerződő viselt neve</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="personBirthName" type="personNameType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Szerződő születési neve</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="placeOfBirth">
+            <xsd:annotation>
+              <xsd:documentation>Születési hely</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="27"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="dateOfBirth" type="xsd:date">
+            <xsd:annotation>
+              <xsd:documentation>Születési idő</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="motherMaidenName" type="personNameType">
+            <xsd:annotation>
+              <xsd:documentation>Szerződő anyja neve</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="citizenship">
+            <xsd:annotation>
+              <xsd:documentation>Állampolgárság</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="M">
+                  <xsd:annotation>
+                    <xsd:documentation>Magyar</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="E">
+                  <xsd:annotation>
+                    <xsd:documentation>EGT tagállam</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:enumeration>
+                <xsd:enumeration value="K">
+                  <xsd:annotation>
+                    <xsd:documentation>Egyéb külföldi</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:enumeration>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="hasResidencePermission" type="xsd:boolean" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Letelepedési / tartózkodási engedéllyel rendelkezik?  Külföldi állampolgárok esetén kötelező.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personType">
+    <xsd:annotation>
+      <xsd:documentation>Természetes személy</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="simplePersonType">
+        <xsd:sequence>
+          <xsd:choice>
+            <xsd:annotation>
+              <xsd:documentation>Természetes személy címe</xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="structuredAddress" type="structuredAddressType">
+              <xsd:annotation>
+                <xsd:documentation>Ha strukturált cím adat áll rendelkezésre</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="otherAddress" type="otherAddressType">
+              <xsd:annotation>
+                <xsd:documentation>Nem strukturált cím</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="simpleLegalEntityType">
+    <xsd:annotation>
+      <xsd:documentation>Jogi személy cím nélkül</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="legalEntityName">
+        <xsd:annotation>
+          <xsd:documentation>A cég, szervezet megnevezése</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="150"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="companyForm">
+        <xsd:annotation>
+          <xsd:documentation>Cég formája</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="C">
+              <xsd:annotation>
+                <xsd:documentation>Cég</xsd:documentation>
+              </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="R">
+              <xsd:annotation>
+                <xsd:documentation>Non profit szervezet</xsd:documentation>
+              </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="O">
+              <xsd:annotation>
+                <xsd:documentation>Egyéb</xsd:documentation>
+              </xsd:annotation>
+            </xsd:enumeration>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="hungaryBased" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Magyarországi székhelyű?</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:annotation>
+          <xsd:documentation>Nyilvántartási szám </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="taxNum">
+            <xsd:annotation>
+              <xsd:documentation>Adószám</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="registerNum" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Cégjegyzékszám vagy Megyei bírósági azononosító</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:element name="otherRegisterNum">
+          <xsd:annotation>
+            <xsd:documentation>Egyéb nyilvántartási szám, csak adószámmal nem rendelkező alanyok esetén használható!</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="legalEntityType">
+    <xsd:annotation>
+      <xsd:documentation>Jogi személy</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="simpleLegalEntityType">
+        <xsd:sequence>
+          <xsd:choice>
+            <xsd:annotation>
+              <xsd:documentation>Jogi személy címe</xsd:documentation>
+            </xsd:annotation>
+            <xsd:element name="structuredAddress" type="structuredAddressType">
+              <xsd:annotation>
+                <xsd:documentation>Ha strukturált cím adat áll rendelkezésre</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="otherAddress" type="otherAddressType">
+              <xsd:annotation>
+                <xsd:documentation>Nem struktúrált cím</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="vehicleDataType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármű adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="licensePlate" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Rendszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo">
+        <xsd:annotation>
+          <xsd:documentation>Alvázszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+            <xsd:pattern value=".*[A-Za-z0-9].*"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBrand">
+        <xsd:annotation>
+          <xsd:documentation>Gyártmány</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleModel" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű típusa</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="vehicleLegalClassType">
+        <xsd:annotation>
+          <xsd:documentation>Jármű kategória</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tempVehicleDataType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármű adatai ideiglenes rendszámmal</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="licensePlate">
+        <xsd:annotation>
+          <xsd:documentation>Rendszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="licensePlateYear" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Ideiglenes rendszám kiadás éve </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:pattern value="\d{4}"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Alvázszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+            <xsd:pattern value=".*[A-Za-z0-9].*"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBrand" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Gyártmány</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleModel" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű típusa</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="vehicleLegalClassType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű kategória</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="changeVehicleDataType">
+    <xsd:annotation>
+      <xsd:documentation>Gépjármű adatai kötvény leíró adatainak megváltoztatásához</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="licensePlate" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Rendszám (Nyilvántartásba vételre nem kötelezett gépjárművek esetén értelem szerűen nem szükséges megadni.) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="licensePlateYear" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Ideiglenes rendszám kiadás éve </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:pattern value="\d{4}"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Alvázszám</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+            <xsd:pattern value=".*[A-Za-z0-9].*"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBrand" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Gyártmány</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleModel" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű típusa</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="vehicleLegalClassType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű kategória</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="licensePlateChange" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Rendszámváltozás</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="changeDate" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Rendszám változás dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="previousLicensePlate">
+              <xsd:annotation>
+                <xsd:documentation>Előző rendszám</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="20"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="damagedVehicleDataType">
+    <xsd:annotation>
+      <xsd:documentation>Károsult gépjármű adatai</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="licensePlate" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Rendszám (A rendszám vagy alvázszám közül legalább egyik kitöltése kötelező)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Alvázszám (A rendszám vagy alvázszám közül legalább egyik kitöltése kötelező)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+            <xsd:pattern value=".*[A-Za-z0-9].*"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBrand">
+        <xsd:annotation>
+          <xsd:documentation>Gyártmány</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleModel" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Jármű típusa</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="policyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződés adatai típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="policyNo" type="policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceStartDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceTermDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak vége </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="extendedPolicyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Bővített szerződés adatai típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="policyDataType">
+        <xsd:sequence>
+          <xsd:element name="contractingDate" type="bomaDateTime">
+            <xsd:annotation>
+              <xsd:documentation>Szerződés kötés dátuma + ideje (óra,perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="foreignInsurerName" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Külföldi biztosító megnevezése</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="riskAssessmentStartDate" type="bomaDateTime">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatkezelés kezdő dátuma + ideje (óra, perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="riskSharingTermDate" type="bomaDateTime" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés megszűnésének dátuma + ideje (óra, perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="riskSharingTermCause" type="riskSharingTermCauseType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="termComment" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Megjegyzés megszüntetéshez </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="200"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="unsecuredPeriodStart" type="xsd:date" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="unsecuredPeriodEnd" type="xsd:date" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="latePolicyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Bővített szerződés adatai típus az utólagos bejelentéshez</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="policyDataType">
+        <xsd:sequence>
+          <xsd:element name="bmRatingBasis" type="bmRatingBasisType">
+            <xsd:annotation>
+              <xsd:documentation>Besorolás alapja</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="bmRating" type="BMCodeType">
+            <xsd:annotation>
+              <xsd:documentation>Bonus-malus besorolás (Külföldi kárelőzmény esetén a befogadó Biztosító által, a kárelőzmény igazolás alapján megállapított bonus-malus besorolás értéke) </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="usedPolicy" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Felhasznált kártörténet kötvénye</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="policyInsCo" type="companyCodeType">
+                  <xsd:annotation>
+                    <xsd:documentation>Biztosító</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="policyNo">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény száma</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="policyNoType">
+                      <xsd:pattern value=".*[A-Za-z0-9].*"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="policyInternalUid" type="policyInternalUidType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény Kártörténet Nyilvántartásbeli egyedi azonosítója</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="nextBmRating" type="BMCodeType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A következő biztosítási időszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="contractingDate" type="bomaDateTime">
+            <xsd:annotation>
+              <xsd:documentation>Szerződés kötés dátuma + ideje (óra,perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="foreignInsurerName" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Külföldi biztosító megnevezése</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="riskAssessmentStartDate" type="bomaDateTime">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatkezelés kezdő dátuma + ideje (óra, perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="riskSharingTermDate" type="bomaDateTime" minOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés megszűnésének dátuma + ideje (óra, perc)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="riskSharingTermCause" type="riskSharingTermCauseType" minOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="termComment" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Megjegyzés megszüntetéshez </xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="200"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="unsecuredPeriodStart" type="xsd:date" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="unsecuredPeriodEnd" type="xsd:date" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="policyBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződés B/M besorolás adatai típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="policyDataType">
+        <xsd:sequence>
+          <xsd:element name="policyInternalUid" type="policyInternalUidType">
+            <xsd:annotation>
+              <xsd:documentation>Szerződés egyedi belső azonosítója </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="bmRatingBasis" type="bmRatingBasisType">
+            <xsd:annotation>
+              <xsd:documentation>Besorolás alapja</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="bmRating" type="BMCodeType">
+            <xsd:annotation>
+              <xsd:documentation>Bonus-malus besorolás (Külföldi kárelőzmény esetén a befogadó Biztosító által, a kárelőzmény igazolás alapján megállapított bonus-malus besorolás értéke) </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="nextBmRating" type="BMCodeType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A következő biztosítási időszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="usedPolicy" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Felhasznált kártörténet kötvénye</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="policyInsCo" type="companyCodeType">
+                  <xsd:annotation>
+                    <xsd:documentation>Biztosító</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="policyNo">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény száma</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="policyNoType">
+                      <xsd:pattern value=".*[A-Za-z0-9].*"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="policyInternalUid" type="policyInternalUidType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény Kártörténet Nyilvántartásbeli egyedi azonosítója</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="renewPolicyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződés adatai típus a szerződés megújításhoz</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="policyDataType">
+        <xsd:sequence>
+          <xsd:element name="policyInternalUid" type="policyInternalUidType">
+            <xsd:annotation>
+              <xsd:documentation>Szerződés egyedi belső azonosítója </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="bmRating" type="BMCodeType">
+            <xsd:annotation>
+              <xsd:documentation>Bonus-malus besorolás (Külföldi kárelőzmény esetén a befogadó Biztosító által, a kárelőzmény igazolás alapján megállapított bonus-malus besorolás értéke) </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="nextBmRating" type="BMCodeType" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>A következő biztosítási időszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="usedPolicy" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Felhasznált kártörténet kötvénye</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="policyInsCo" type="companyCodeType">
+                  <xsd:annotation>
+                    <xsd:documentation>Biztosító</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="policyNo">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény száma</xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                    <xsd:restriction base="policyNoType">
+                      <xsd:pattern value=".*[A-Za-z0-9].*"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+                <xsd:element name="policyInternalUid" type="policyInternalUidType" minOccurs="0">
+                  <xsd:annotation>
+                    <xsd:documentation>Kötvény Kártörténet Nyilvántartásbeli egyedi azonosítója</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="damageEventType">
+    <xsd:annotation>
+      <xsd:documentation>Káresemény</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="dateOfClaimData" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Kárbejelentés dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageNumber">
+        <xsd:annotation>
+          <xsd:documentation>Kárszám </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="dateOfAccident" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="obligationKnownDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kötelezettség ismertté válásának dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="payedBackDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kifizetett kárösszeg visszafizetésének dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="otherObligated" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kártérítés egyéb kötelezettje. (Csak MABISZ GKI-től érkező kár esetén.) </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="policyHistDataType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény adatok</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="sequenceNumber" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="policyNo" type="policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insCo" type="companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A kötvényt kötő biztosítónak az ID-ja, kivéve, ha ki van töltve a foreginInsurerName, mert akkor a külföldi kötvényt bejelentő biztosító ID-ja</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insurerName">
+        <xsd:annotation>
+          <xsd:documentation>Az insCo-ban megadott biztosító megnevezése. Lezárt kötvény esetén a lezáráskori megnevezés</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="contractingDate" type="bomaDateTime" nillable="true">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés kötés dátuma + ideje (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="foreignInsurerName" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Külföldi biztosító megnevezése</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="insuranceStartDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceTermDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak vége </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskAssessmentStartDate" type="bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázat viselés kezdet dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermDate" type="bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázat viselés vége dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermCause" type="riskSharingTermCauseType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="unsecuredPeriodStart" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="unsecuredPeriodEnd" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pause" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetési időszakok</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="startPauseDate" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Szüneteltetés kezdő dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endPauseDate" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Szüneteltetés záró dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="state">
+        <xsd:annotation>
+          <xsd:documentation>Állapot</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LIVE"/>
+            <xsd:enumeration value="CLOSED"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="bmRating" type="BMCodeType" nillable="true">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus besorolás </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRatingType" type="bmRatingTypeType">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus besorolás típusa </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="usedPolicy" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Felhasznált kártörténet kötvénye</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="insCo" type="companyCodeType">
+              <xsd:annotation>
+                <xsd:documentation>Biztosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyNo" type="policyNoType">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény száma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyUsed" type="xsd:boolean">
+              <xsd:annotation>
+                <xsd:documentation>Kártörténet felhasználva? </xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="vehicleData" type="vehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvényhez tartozó gépjármű adatok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="claimData" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Kötvényhez tartozó káresemény adatok</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="dateOfClaimData" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kárbejelentés dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dateOfAccident" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Káresemény dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="obligationKnownDate" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kötelezettség ismertté válásának dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="payedBackDate" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kifizetett kárösszeg visszafizetésének dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="nextBmRating" type="BMCodeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A következo biztosítási idoszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyEntryType" type="policyEntryTypeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A mező megmutatja, hogy az adott kötvény milyen módon került bejelentésre a Kártörténeti Rendszerbe. Ha nincs megadva, az egyenértékű a "Normál kötvénybejelentés" magadásával.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageHistoryUsed" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kötvény felhasznált állapotban van jelző</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tempPolicyHistDataType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény adatok</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="sequenceNumber" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="policyNo" type="policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insCo" type="companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A kötvényt kötő biztosítónak az ID-ja, kivéve, ha ki van töltve a foreginInsurerName, mert akkor a külföldi kötvényt bejelentő biztosító ID-ja</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insurerName">
+        <xsd:annotation>
+          <xsd:documentation>Az insCo-ban megadott biztosító megnevezése. Lezárt kötvény esetén a lezáráskori megnevezés</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="contractingDate" type="bomaDateTime" nillable="true">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés kötés dátuma + ideje (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="foreignInsurerName" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Külföldi biztosító megnevezése</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="100"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="insuranceStartDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceTermDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak vége </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskAssessmentStartDate" type="bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázat viselés kezdet dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermDate" type="bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázat viselés vége dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermCause" type="riskSharingTermCauseType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="unsecuredPeriodStart" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="unsecuredPeriodEnd" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pause" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetési időszakok</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="startPauseDate" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Szüneteltetés kezdő dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="endPauseDate" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Szüneteltetés záró dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="state">
+        <xsd:annotation>
+          <xsd:documentation>Állapot</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LIVE"/>
+            <xsd:enumeration value="CLOSED"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="bmRating" type="BMCodeType" nillable="true">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus besorolás </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRatingType" type="bmRatingTypeType">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus besorolás típusa </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="usedPolicy" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Felhasznált kártörténet kötvénye</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="insCo" type="companyCodeType">
+              <xsd:annotation>
+                <xsd:documentation>Biztosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyNo" type="policyNoType">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény száma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyUsed" type="xsd:boolean">
+              <xsd:annotation>
+                <xsd:documentation>Kártörténet felhasználva? </xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="vehicleData" type="tempVehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvényhez tartozó gépjármű adatok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="claimData" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Kötvényhez tartozó káresemény adatok</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="dateOfClaimData" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kárbejelentés dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dateOfAccident" type="xsd:date">
+              <xsd:annotation>
+                <xsd:documentation>Káresemény dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="obligationKnownDate" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kötelezettség ismertté válásának dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="payedBackDate" type="xsd:date" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kifizetett kárösszeg visszafizetésének dátuma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="nextBmRating" type="BMCodeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A következo biztosítási idoszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyEntryType" type="policyEntryTypeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A mező megmutatja, hogy az adott kötvény milyen módon került bejelentésre a Kártörténeti Rendszerbe. Ha nincs megadva, az egyenértékű a "Normál kötvénybejelentés" magadásával.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="policyEntryTypeType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény bejelentés típusa</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NORMAL_ENTRY">
+        <xsd:annotation>
+          <xsd:documentation>Normál kötvénybejelentés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LATE_ENTRY">
+        <xsd:annotation>
+          <xsd:documentation>Utólagos kötvénybejelentés migrációs céllal, korlátozott konzisztencia ellenőrzés mellett</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="policyInfoKindType">
+    <xsd:annotation>
+      <xsd:documentation>Kiegészítő adatok típus jelzője</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvény adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USED_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>Kárelőzményként hivatkozott kötvény adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="POLICY_IS_USED_BY">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott kötvényt kárelőzményként felhasználó kötvény adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USED_POLICY_IS_USED_BY">
+        <xsd:annotation>
+          <xsd:documentation>Kárelőzményként hivatkozott kötvényt kárelőzményként felhasználó kötvény adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="OTHER_POLICY">
+        <xsd:annotation>
+          <xsd:documentation>A szerződő megadott gépjárművére létező másik kötvény adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USED_POLICY_CONTRACTOR">
+        <xsd:annotation>
+          <xsd:documentation>Kárelőzményként hivatkozott kötvény szerződőjének adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PAUSE">
+        <xsd:annotation>
+          <xsd:documentation>Hivatkozott szüneteltetési időszak adata</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="contractorType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő típusa</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="PERSON"/>
+      <xsd:enumeration value="LEGAL_ENTITY"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="policyStateType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény állapota</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="LIVE"/>
+      <xsd:enumeration value="CLOSED"/>
+      <xsd:enumeration value="PAUSED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="selectedAdditionalInfoType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="REQUIRED">
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő információk átadása szükséges</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="EXTENDED_REQUIRED">
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő információk bővített körének átadása szükséges, a biztosító rendelkezik az ügyféltől származó felhatalmazással a bővített kiegészítő információk megismerésére.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NOT_REQUIRED">
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő információk átadása nem szükséges.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="bmRatingBasisType">
+    <xsd:annotation>
+      <xsd:documentation>Besorolás alapja</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NEW_ENTRY">
+        <xsd:annotation>
+          <xsd:documentation>Új belépő</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="PARALLEL">
+        <xsd:annotation>
+          <xsd:documentation>Párhuzamos üzemeltetés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="EXISTING_CONTRACT">
+        <xsd:annotation>
+          <xsd:documentation>Meglevő szerződés</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FOREIGN_DH">
+        <xsd:annotation>
+          <xsd:documentation>Külföldi kárelőzmény</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NON_BM_CATEGORY">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű kategória nem része a B/M rendszernek</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

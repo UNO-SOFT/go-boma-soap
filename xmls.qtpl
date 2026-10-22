@@ -10,7 +10,7 @@
 
 {% func (x SendXmlMultiBomaMsgRequest) XML() %}
 <sendXmlMultiBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
-  <targetList>{% for y := range x.Targets %}
+  <targetList>{% for _, y := range x.Targets %}
     <targetInsCo>{%= XML(y) %}</targetInsCo>
   {% endfor %}</targetList>
   {%= x.SendXmlBomaMsgRequest.XML() %}

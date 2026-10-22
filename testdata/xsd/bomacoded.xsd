@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio 1.0.8.0 (http://www.liquid-technologies.com) -->
+<xsd:schema xmlns:basebns="http://www.mabisz.hu/boma" xmlns="http://www.mabisz.hu/boma/coded" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mabisz.hu/boma/coded" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="bomabase.xsd"/>
+  <xsd:complexType name="heartBeatType">
+    <xsd:annotation>
+      <xsd:documentation>Életjel üzenet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="status" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Az egyes biztosítók aktuális kapcsolati státusza</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:attribute name="insCo" type="basebns:companyCodeType" use="required">
+            <xsd:annotation>
+              <xsd:documentation>A biztosító azonosítója</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+          <xsd:attribute name="connected" type="xsd:boolean" use="required">
+            <xsd:annotation>
+              <xsd:documentation>A biztosító aktuális státusza</xsd:documentation>
+            </xsd:annotation>
+          </xsd:attribute>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="optional">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="heartBeat" type="heartBeatType">
+    <xsd:annotation>
+      <xsd:documentation>Életjel és életjel kérés</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

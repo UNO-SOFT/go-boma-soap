@@ -37,7 +37,7 @@ func (x SendXmlMultiBomaMsgRequest) StreamXML(qw422016 *qt422016.Writer) {
 //line xmls.qtpl:11
 	qw422016.N().S(`<sendXmlMultiBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma"><targetList>`)
 //line xmls.qtpl:13
-	for y := range x.Targets {
+	for _, y := range x.Targets {
 //line xmls.qtpl:13
 		qw422016.N().S(`<targetInsCo>`)
 //line xmls.qtpl:14

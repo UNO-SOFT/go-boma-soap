@@ -1,0 +1,3185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp1 (http://www.altova.com) by Peter Bodo (Qualysoft Zrt.) -->
+<xsd:schema xmlns="http://www.mabisz.hu/kartorteneti/coded" xmlns:coded="http://www.mabisz.hu/kartorteneti/coded" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:basebns="http://www.mabisz.hu/boma" targetNamespace="http://www.mabisz.hu/kartorteneti/coded" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="http://www.mabisz.hu/boma" schemaLocation="bomabase.xsd"/>
+  <xsd:element name="informNewPolicy" type="informNewPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvényesítésről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvényesítésről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést kiváltó üzleti eset</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+          <xsd:annotation>
+            <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:choice>
+          <xsd:annotation>
+            <xsd:documentation>Szerződő adatai</xsd:documentation>
+          </xsd:annotation>
+          <xsd:element name="person" type="basebns:personType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="legalEntity" type="basebns:legalEntityType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:choice>
+      <xsd:element name="vehicleData" type="basebns:vehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData" type="basebns:extendedPolicyDataType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="autoDamageHistoryDay" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A Biztosítási időszak vége dátumhoz képest hány naptári nappal szükséges a rendszernek automatikusan kártörténeti igazolást küldeni a kötvényről az érintett Biztosító számára</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-365"/>
+            <xsd:maxInclusive value="365"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informNewBMRating" type="informNewBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolásról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolásról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRatingData" type="basebns:policyBMRatingType">
+        <xsd:annotation>
+          <xsd:documentation>Besorolás adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informRecallBMRating" type="informRecallBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolás törléséről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informRecallBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolás törléséről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény egyedi belső azonosítója </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informChangeBMRating" type="informChangeBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolás módosításáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informChangeBMRatingType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás B/M besorolás módosításáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRatingData" type="basebns:policyBMRatingType">
+        <xsd:annotation>
+          <xsd:documentation>Besorolás adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informRenewPolicy" type="informRenewPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény (biztosítási időszak) megújításáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informRenewPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény (biztosítási időszak) megújításáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData" type="basebns:renewPolicyDataType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="autoDamageHistoryDay" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A Biztosítási időszak vége dátumhoz képest hány naptári nappal szükséges a rendszernek automatikusan kártörténeti igazolást küldeni a kötvényről az érintett Biztosító számára</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-365"/>
+            <xsd:maxInclusive value="365"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informStartPolicyPause" type="informStartPolicyPauseType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény szüneteltetésének indításáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informStartPolicyPauseType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény szüneteltetésének indításáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pauseStartDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés kezdő dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informClosePolicyPause" type="informClosePolicyPauseType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény szüneteltetésének lezárásáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informClosePolicyPauseType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény szüneteltetésének lezárásáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pauseStartDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés kezdő dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pauseTermDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés záró dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informTermPolicy" type="informTermPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény megszüntetéséről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informTermPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény megszüntetéséről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermDate" type="basebns:bomaDateTime">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermCause" type="basebns:riskSharingTermCauseType">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="termComment" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Megjegyzés megszüntetéshez </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="200"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="nextBmRating" type="basebns:BMCodeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A következő biztosítási időszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informChangePolicyNo" type="informChangePolicyNoType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvényszám megváltozásáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informChangePolicyNoType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvényszám megváltozásáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma (ahogy a KNY nyilvántartásban jelenleg szerepel)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="newPolicyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Az új kötvényszám</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informReopenPolicy" type="informReopenPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás megszüntetett kötvény élesztéséről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informReopenPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás megszüntetett kötvény élesztéséről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informChangePolicyData" type="informChangePolicyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény leíró adatainak megváltoztatásáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informChangePolicyDataType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás kötvény leíró adatainak megváltoztatásáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="basebns:extendedPolicyDataType">
+              <xsd:sequence>
+                <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+                  <xsd:annotation>
+                    <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="vehicleData" type="basebns:changeVehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Gepjármű adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="autoDamageHistoryDay" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A megadott nappal később/előbb  kér automatikus kártörténeti igazolást</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-365"/>
+            <xsd:maxInclusive value="365"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informChangeContractorData" type="informChangeContractorDataType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás Szerződő adatainak megváltoztatásáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informChangeContractorDataType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás Szerződő adatainak megváltoztatásáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="person" type="basebns:personType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="legalEntity" type="basebns:legalEntityType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informNewDamageEvent" type="informNewDamageEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás új káreseményről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewDamageEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás új káreseményről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageEventData" type="basebns:damageEventType">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informChangeDamageEvent" type="informChangeDamageEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás káresemény adatainak módosításáról</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informChangeDamageEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás káresemény adatainak módosításáról</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageEventData">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:complexContent>
+            <xsd:extension base="basebns:damageEventType">
+              <xsd:sequence>
+                <xsd:element name="damageInternalUid" type="basebns:damageInternalUidType">
+                  <xsd:annotation>
+                    <xsd:documentation>Káresemény egyedi belső azonosító</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:extension>
+          </xsd:complexContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informNewContractor" type="informNewContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Új szerződő bejelentése, a Kártörténeti Nyilvántartásba kötvény bejelentés céljából</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Új szerződő bejelentése, a Kártörténeti Nyilvántartásba kötvény bejelentés céljából</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="person" type="basebns:personType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="legalEntity" type="basebns:legalEntityType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informSucceedingEvent" type="informSucceedingEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás jogi személyek jogutódlási eseményéről, csak legal entity szerződők esetén használható!</xsd:documentation>
+    </xsd:annotation>
+    <xsd:unique name="uniqueSucceedingInternalUids">
+      <!--<xsd:annotation>
+				<xsd:documentation>A megadott contractorInternalUID-k nem lehetnek azonosak.</xsd:documentation>
+			</xsd:annotation>-->
+      <xsd:selector xpath="coded:firstContractorInternalUid|coded:secondContractorInternalUid"/>
+      <xsd:field xpath="."/>
+    </xsd:unique>
+  </xsd:element>
+  <xsd:complexType name="informSucceedingEventType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás jogi személyek jogutódlási eseményéről, csak legal entity szerződők esetén használható!</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="firstContractorInternalUid">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő1 (jogi személy) Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="basebns:contractorInternalUidType">
+            <xsd:pattern value="12(\p{N})*">
+              <xsd:annotation>
+                <xsd:documentation>Csak céges szerződő engedélyezett</xsd:documentation>
+              </xsd:annotation>
+            </xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="secondContractorInternalUid">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő2 (jogi személy) Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="basebns:contractorInternalUidType">
+            <xsd:pattern value="12(\p{N})*">
+              <xsd:annotation>
+                <xsd:documentation>Csak céges szerződő engedélyezett</xsd:documentation>
+              </xsd:annotation>
+            </xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="operation">
+        <xsd:annotation>
+          <xsd:documentation>Művelet iránya (bejelentés/törlés)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ADD_RELATION"/>
+            <xsd:enumeration value="REMOVE_RELATION"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="comment" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Megjegyzés, vagy egyéb szöveges tájékoztatás</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="200"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informReassignPolicy" type="informReassignPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás szerződő megváltoztatásárol. Csak legal entity szerződők esetén használható!</xsd:documentation>
+    </xsd:annotation>
+    <xsd:unique name="uniqueReassignInternalUids">
+      <!--<xsd:annotation>
+				<xsd:documentation>A megadott contractorInternalUID-k nem lehetnek azonosak.</xsd:documentation>
+			</xsd:annotation>-->
+      <xsd:selector xpath="coded:contractorInternalUid|coded:newContractorInternalUid"/>
+      <xsd:field xpath="."/>
+    </xsd:unique>
+  </xsd:element>
+  <xsd:complexType name="informReassignPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás szerződő megváltoztatásárol. Csak legal entity szerződők esetén használható!</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti azonosítója</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="basebns:contractorInternalUidType">
+            <xsd:pattern value="12(\p{N})*">
+              <xsd:annotation>
+                <xsd:documentation>Csak céges szerződő engedélyezett</xsd:documentation>
+              </xsd:annotation>
+            </xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="newContractorInternalUid">
+        <xsd:annotation>
+          <xsd:documentation>Új Szerződő Kártörténeti azonosítója</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="basebns:contractorInternalUidType">
+            <xsd:pattern value="12(\p{N})*">
+              <xsd:annotation>
+                <xsd:documentation>Csak céges szerződő engedélyezett</xsd:documentation>
+              </xsd:annotation>
+            </xsd:pattern>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informNewTemporaryPolicy" type="informNewTemporaryPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás ideiglenes rendszámra vonatkozó kötvényről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewTemporaryPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás ideiglenes rendszámra vonatkozó kötvényről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést kiváltó üzleti eset</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+          <xsd:annotation>
+            <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:choice>
+          <xsd:annotation>
+            <xsd:documentation>Szerződő adatai</xsd:documentation>
+          </xsd:annotation>
+          <xsd:element name="person" type="basebns:personType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="legalEntity" type="basebns:legalEntityType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:choice>
+      <xsd:element name="vehicleData" type="basebns:tempVehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData" type="basebns:extendedPolicyDataType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="autoDamageHistoryDay" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A Biztosítási időszak vége dátumhoz képest hány naptári nappal szükséges a rendszernek automatikusan kártörténeti igazolást küldeni a kötvényről az érintett Biztosító számára</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="-365"/>
+            <xsd:maxInclusive value="365"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informNewDamagedVehicle" type="informNewDamagedVehicleType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás károsult gépjárműről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informNewDamagedVehicleType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás károsult gépjárműről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést kiváltó üzleti eset</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageInternalUid" type="basebns:damageInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Káresemény egyedi belső azonosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damagedVehicleData" type="basebns:damagedVehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Károsult jármű adatai </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="damageHistRequestByPolicy" type="damageHistRequestByPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti igazolás lekérdezése kötvényre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistRequestByPolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti igazolás lekérdezése kötvényre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>Lekérdezés jogcíme</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policyInternalId" type="basebns:policyInternalUidType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Egyedi belső azonosító </xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyNo" type="basebns:policyNoType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény száma</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="contrInsCo" type="basebns:companyCodeType">
+              <xsd:annotation>
+                <xsd:documentation>Szerződött Biztosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="damageHistRequestByContractor" type="damageHistRequestByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti kötvények lekérdezése szerződőre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistRequestByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti kötvények lekérdezése szerződőre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="damageHistRequestByContractorBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="damageHistDataRequestByContractor" type="damageHistDataRequestByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti adatok lekérdezése szerződőre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistDataRequestByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti adatok lekérdezése szerződőre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="damageHistRequestByContractorBaseType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="damageHistRequestByContractorBaseType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti kötvények/adatok lekérdezése szerződőre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>Lekérdezés jogcíme</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+          <xsd:annotation>
+            <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:choice>
+          <xsd:annotation>
+            <xsd:documentation>Szerződő adatai</xsd:documentation>
+          </xsd:annotation>
+          <xsd:element name="person" type="basebns:personType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="legalEntity" type="basebns:legalEntityType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="damageHistListByContractor" type="damageHistListByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti kötvények listája szerződőre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistListByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti kötvények listája szerződőre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="person" type="basebns:personType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="legalEntity" type="basebns:legalEntityType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="policyData" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő kötvényei</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény egyedi belső azonosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyNo" type="basebns:policyNoType">
+              <xsd:annotation>
+                <xsd:documentation>Kötvényszám</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="insCo" type="basebns:companyCodeType">
+              <xsd:annotation>
+                <xsd:documentation>A kötvényt bejelentő biztosító ID-ja</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="licensePlate" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Rendszám (A rendszám vagy alvázszám közül legalább egyik kitöltése kötelező)</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="20"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="vehicleBodyRegNo" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Alvázszám (A rendszám vagy alvázszám közül legalább egyik kitöltése kötelező)</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="30"/>
+                  <xsd:pattern value=".*[A-Za-z0-9].*"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+        <xsd:unique name="uniquePolicyListPolicyInternalUid">
+          <!--<xsd:annotation>
+						<xsd:documentation>Egy kötvény csak egyszer szerepelhet a listában</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:policyInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:unique>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="damageHistDataByContractor" type="damageHistDataByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti adatok listája szerződőre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistDataByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti adatok listája szerződőre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageHistory" type="damageHistoryType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténet</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="usablePoliciesReqByContractor" type="usablePoliciesReqByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Adott szerződő felhasználható kötvényeinek lekérdezése</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="usablePoliciesReqByContractorType">
+    <xsd:annotation>
+      <xsd:documentation>Adott szerződő felhasználható kötvényeinek lekérdezése</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>Lekérdezés jogcíme</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="basebns:vehicleLegalClassType">
+        <xsd:annotation>
+          <xsd:documentation>A gépjármű osztály, amire a lekérdezés vonatkozik</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="damageHistoryType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti igazolás</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:annotation>
+          <xsd:documentation>Szerződő adatai</xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="person" type="basebns:personType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="legalEntity" type="basebns:legalEntityType">
+          <xsd:annotation>
+            <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="registeredContractors" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="registeredContractorData" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:choice>
+                    <xsd:annotation>
+                      <xsd:documentation>Szerződő adatai</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:element name="person" type="basebns:personType">
+                      <xsd:annotation>
+                        <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="legalEntity" type="basebns:legalEntityType">
+                      <xsd:annotation>
+                        <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                  </xsd:choice>
+                  <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+                    <xsd:annotation>
+                      <xsd:documentation>Szerződő Kártörténeti Azonosítója</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+        <xsd:key name="keyRegistredContractors">
+          <!--<xsd:annotation>
+						<xsd:documentation>A contractorInternalUID lista elemei egy kulcsot alkotnak.</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:registeredContractorData/coded:contractorInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:key>
+      </xsd:element>
+      <xsd:element name="policyChain" minOccurs="0">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policy" type="basebns:policyHistDataType" maxOccurs="unbounded">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény adatok</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="mabisz_gki" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>MABASZ GKI Ügyek</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policy" type="basebns:policyHistDataType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="foreignPolicies" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Külföldi kötvények</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policy" type="basebns:policyHistDataType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="prevPolicies" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Nem besorolt kötvények</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policy" type="basebns:policyHistDataType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="temporaryPolicies" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Ideiglenes rendszámos kötvények</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policy" type="basebns:tempPolicyHistDataType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="damageHistResponse" type="damageHistResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti igazolás válasz</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="damageHistResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Kártörténeti igazolás válasz</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageHistory" type="damageHistoryType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti igazolás</xsd:documentation>
+        </xsd:annotation>
+        <xsd:keyref name="keyRefDHRespContrUID" refer="keyRegistredContractors">
+          <!--<xsd:annotation>
+						<xsd:documentation>A megadott ContractorInternalUID megtalálható a registredContractos blokkban</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:contractorInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:keyref>
+        <xsd:keyref name="keyRefDHRespPolicies" refer="keyRegistredContractors">
+          <!--<xsd:annotation>
+						<xsd:documentation>A kötvényláncban megadott minden ContractorInternalUID megtalálható a registredContractos blokkban</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:policyChain/coded:policy/basebns:contractorInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:keyref>
+      </xsd:element>
+      <xsd:element name="additionalInfoOnError" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő adatok hiba esetén</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policyInfo" type="policyInfoType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="recallPolicyEvent" type="recallPolicyEventType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény esemény törlése</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="recallPolicyEventType">
+    <xsd:annotation>
+      <xsd:documentation>Kötvény esemény törlése</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="messageType">
+        <xsd:annotation>
+          <xsd:documentation>Visszavonásra kerülő üzenet típusa</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INF_START_PAUSE"/>
+            <xsd:enumeration value="INF_NEW_DAMAGE"/>
+            <xsd:enumeration value="INF_NEW_DAMAGED_VEHICLE"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="internalUid">
+        <xsd:annotation>
+          <xsd:documentation>Egyedi belső azonosító (káresemény vagy szüneteltetés)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="damagedVehicle" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű rendszám vagy alvázszám károsult gépjármű lejelentésének visszavonása esetén - Egyik kötelező</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="licensePlate" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Rendszám</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="20"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="vehicleBodyRegNo" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Alvázszám</xsd:documentation>
+              </xsd:annotation>
+              <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                  <xsd:maxLength value="30"/>
+                  <xsd:pattern value=".*[A-Za-z0-9].*"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="reason">
+        <xsd:annotation>
+          <xsd:documentation>Indoklás</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="200"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informResponse" type="informResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Rendszer válasza tájékoztató üzenetre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Rendszer válasza tájékoztató üzenetre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo">
+        <xsd:annotation>
+          <xsd:documentation>A küldő rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="basebns:companyCodeType">
+            <xsd:enumeration value="00"/>
+            <xsd:enumeration value="89"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="internalUids" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Egyedi belső azonosítók</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Szerződő egyedi belső azonosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kötvény egyedi belső azonosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="damageInternalUid" type="basebns:damageInternalUidType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Kár egyedi belső azonosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pauseInternalUid" type="basebns:pauseInternalUidType" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Szüneteltetés egyedi belső azaonosító</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="damageHistory" type="damageHistoryType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténet</xsd:documentation>
+        </xsd:annotation>
+        <xsd:keyref name="keyRefInfRespContrUID" refer="keyRegistredContractors">
+          <!--<xsd:annotation>
+						<xsd:documentation>A megadott ContractorInternalUID megtalálható a registredContractos blokkban</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:contractorInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:keyref>
+        <xsd:keyref name="keyRefInfRespPolicies" refer="keyRegistredContractors">
+          <!--<xsd:annotation>
+						<xsd:documentation>A kötvényláncban megadott minden ContractorInternalUID megtalálható a registredContractos blokkban</xsd:documentation>
+					</xsd:annotation>-->
+          <xsd:selector xpath="coded:policyChain/coded:policy/basebns:contractorInternalUid"/>
+          <xsd:field xpath="."/>
+        </xsd:keyref>
+      </xsd:element>
+      <xsd:element name="contractorState" type="basebns:contractorStateType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő státusza</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorIdentified" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>a Szerződő külső nyilvántartásban azonosításra került-e</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="usablePolicies" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kárelőzményként felhasználható kötvények</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usablePolicy" type="usablePolicyType" maxOccurs="unbounded">
+              <xsd:annotation>
+                <xsd:documentation>Kárelőzményként felhasználható kötvény</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="additionalInfoOnError" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő adatok hiba esetén</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="policyInfo" type="policyInfoType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="additionalWarnings" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Figyelmezetető jelzések és kiegészítő adatok sikeres befogadás esetén</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="warning" type="additionalWarningType" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt tájékoztató egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time üzenet ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="usablePoliciesResponse" type="usablePoliciesResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Rendszer válasza tájékoztató üzenetre</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="usablePoliciesResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Rendszer válasza tájékoztató üzenetre</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="basebns:vehicleLegalClassType">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű kategória</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződő belső azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="usablePolicies" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kárelőzményként felhasználható kötvények (ha van az adott GJ kategórában felhasználható ktv,)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="usablePolicy" type="usablePolicyType" maxOccurs="unbounded">
+              <xsd:annotation>
+                <xsd:documentation>Kárelőzményként felhasználható kötvény</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt tájékoztató egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time üzenet ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="eventBasedDamageHistory" type="eventBasedDamageHistoryType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás káreseményről típusú</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="eventBasedDamageHistoryType">
+    <xsd:annotation>
+      <xsd:documentation>Tájékoztatás káreseményről típusú</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>Küldés oka</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="damageHistory" type="damageHistoryType">
+        <xsd:annotation>
+          <xsd:documentation>Kártörténeti igazolás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="policyTechnicalUpdate" type="policyTechnicalUpdateType">
+    <xsd:annotation>
+      <xsd:documentation>Technikai állomány javító üzenet</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="policyTechnicalUpdateType">
+    <xsd:annotation>
+      <xsd:documentation>Technikai állomány javító üzenet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="60">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést kiváltó üzleti eset</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyOwnerInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény biztosítójának kódja</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyInternalUid" type="basebns:policyInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény belső azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element name="insuranceStartDateChange">
+          <xsd:annotation>
+            <xsd:documentation>Biztosítási időszak kezdete</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="xsd:date" minOccurs="0"/>
+              <xsd:element name="newValue" type="xsd:date"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="insuranceTermDateChange">
+          <xsd:annotation>
+            <xsd:documentation>Biztosítási időszak vége </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="xsd:date" minOccurs="0"/>
+              <xsd:element name="newValue" type="xsd:date"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="bmRatingChange">
+          <xsd:annotation>
+            <xsd:documentation>Bonus-malus besorolás (Külföldi kárelőzmény esetén a befogadó Biztosító által, a kárelőzmény igazolás alapján megállapított bonus-malus besorolás értéke) </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:BMCodeType" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:BMCodeType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="bmRatingTypeChange">
+          <xsd:annotation>
+            <xsd:documentation>Bonus-malus besorolás típusa </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:bmRatingTypeType" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:bmRatingTypeType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="nextBmRatingChange">
+          <xsd:annotation>
+            <xsd:documentation>A következő biztosítási időszakra várható bonus-malus besorolás értéke (a jelenlegi információk alapján kalkulált  nem garantált érték)</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:BMCodeType" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:BMCodeType" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="foreignInsurerNameChange">
+          <xsd:annotation>
+            <xsd:documentation>Külföldi biztosító megnevezése</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="100"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="newValue" minOccurs="0">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="100"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="riskAssessmentStartDateChange">
+          <xsd:annotation>
+            <xsd:documentation>Kockázatkezelés kezdő dátuma + ideje (óra,perc)</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:bomaDateTime" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:bomaDateTime"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="riskSharingTermDateChange">
+          <xsd:annotation>
+            <xsd:documentation>Kockázatviselés megszűnésének dátuma + ideje (óra, perc)</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:bomaDateTime" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:bomaDateTime"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="riskSharingTermCauseChange">
+          <xsd:annotation>
+            <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:riskSharingTermCauseType" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:riskSharingTermCauseType"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="unsecuredPeriodStartChange">
+          <xsd:annotation>
+            <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak kezdete</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="xsd:date" minOccurs="0"/>
+              <xsd:element name="newValue" type="xsd:date" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="unsecuredPeriodEndChange">
+          <xsd:annotation>
+            <xsd:documentation>Kockázatviselés kezdetét megelőző fedezetlen időszak vége</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="xsd:date" minOccurs="0"/>
+              <xsd:element name="newValue" type="xsd:date" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="contractingDateChange">
+          <xsd:annotation>
+            <xsd:documentation>Szerződéskötés dátuma + ideje (óra,perc)</xsd:documentation>
+          </xsd:annotation>
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="oldValue" type="basebns:bomaDateTime" minOccurs="0"/>
+              <xsd:element name="newValue" type="basebns:bomaDateTime"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="informLatePolicy" type="informLatePolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Utólagos, migrációs célú tájékoztatás kötvényesítésről</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="informLatePolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Utólagos, migrációs célú tájékoztatás kötvényesítésről</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító - vagy BOMA központ</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett rendszer - Kártörténeti Nyilvántartás</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A kérést kiváltó üzleti eset</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+          <xsd:annotation>
+            <xsd:documentation>Szerződő egyedi belső azonosító</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:choice>
+          <xsd:annotation>
+            <xsd:documentation>Szerződő adatai</xsd:documentation>
+          </xsd:annotation>
+          <xsd:element name="person" type="basebns:personType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="legalEntity" type="basebns:legalEntityType">
+            <xsd:annotation>
+              <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:choice>
+      <xsd:element name="vehicleData" type="basebns:vehicleDataType">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyData" type="basebns:latePolicyDataType">
+        <xsd:annotation>
+          <xsd:documentation>Szerződés adatai</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A tájékoztató üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="policyInfoType">
+    <xsd:annotation>
+      <xsd:documentation>Kiegészítő adatok</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="policyInsCo" type="basebns:companyCodeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Biztosító BOMA kódja</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény szám</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskAssessmentStartDate" type="basebns:bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés kezdete dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermDate" type="basebns:bomaDateTime" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés vége dátum + idő (óra,perc)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceStartDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak kezdete</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="insuranceTermDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási időszak vége</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorType" type="basebns:contractorType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Ügyfél típusa</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorIdentified" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Ügyfél külső nyilvántartásban azonosított</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="vehicleClass" type="basebns:vehicleLegalClassType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Gépjármű kategória</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyState" type="basebns:policyStateType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kötvény állapota</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="pauseStartDate" type="xsd:date" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Szüneteltetés kezdetének dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermCause" type="basebns:riskSharingTermCauseType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének oka</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Alvázszám</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="licensePlate" type="xsd:string" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Rendszám</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="kind" type="basebns:policyInfoKindType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Típusjelző</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="extended" type="xsd:boolean">
+      <xsd:annotation>
+        <xsd:documentation>Ügyfél felhatalmazással hozzáférhető adatokat tartalmaz</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="usablePolicyType">
+    <xsd:annotation>
+      <xsd:documentation>Kárelőzményként felhasználható kötvény típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="insCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>Biztosító megnevezése</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="policyNo" type="basebns:policyNoType">
+        <xsd:annotation>
+          <xsd:documentation>Biztosítási kötvény száma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRating" type="basebns:BMCodeType">
+        <xsd:annotation>
+          <xsd:documentation>Kötvényhez tartozó bonus-malus fokozat</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="bmRatingType" type="basebns:bmRatingTypeType">
+        <xsd:annotation>
+          <xsd:documentation>Bonus-malus besorolás típusa</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="termDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének dátuma</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="riskSharingTermCause" type="basebns:riskSharingTermCauseType">
+        <xsd:annotation>
+          <xsd:documentation>Kockázatviselés megszűnésének oka </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="licensePlate" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Kapcsolódó gépjármű rendszáma</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="vehicleBodyRegNo">
+        <xsd:annotation>
+          <xsd:documentation>Kapcsolódó gépjármű alvázszáma</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+            <xsd:pattern value=".*[A-Za-z0-9].*"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="additionalWarningType">
+    <xsd:annotation>
+      <xsd:documentation>Figyelmeztető jelzések sikeres befogadás esetén típus</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="policyInfo" type="policyInfoType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="errorCode" type="basebns:resultOfRequestType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Hibakód</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="contractorDataRequestByUid" type="contractorDataRequestByUidType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő adat lekérdezés internal UID alapján</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="contractorDataRequestByUidType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő adat lekérdezés internal UID alapján</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="reasonOfRequest" type="basebns:reasonOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>Lekérdezés jogcíme</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+        <xsd:annotation>
+          <xsd:documentation>A lekérdezendő szerződő egyedi belső azonosítója</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice>
+        <xsd:annotation>
+          <xsd:documentation>Kiegészítő adatok a lekérdezéshez</xsd:documentation>
+        </xsd:annotation>
+        <xsd:element name="personDateOfBirth" type="xsd:date">
+          <xsd:annotation>
+            <xsd:documentation>Természetes személy lekérdezés esetén megadandó születési dátum</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="legalEntityTaxNum">
+          <xsd:annotation>
+            <xsd:documentation>Jogi személy lekérdezés esetén megadható adószám</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="20"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="legalEntityOtherRegisterNum">
+          <xsd:annotation>
+            <xsd:documentation>Jogi személy lekérdezés esetén megadható egyéb azonosító szám</xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="50"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="additionalInfoOnError" type="basebns:selectedAdditionalInfoType">
+      <xsd:annotation>
+        <xsd:documentation>Kiegészítő információk átadásának kérelme hiba esetén</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:element name="contractorDataResponse" type="contractorDataResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő adatlekérdezésre válasz </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="contractorDataResponseType">
+    <xsd:annotation>
+      <xsd:documentation>Szerződő adatlekérdezésre válasz </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="senderInsCo" type="basebns:companyCodeType" fixed="89">
+        <xsd:annotation>
+          <xsd:documentation>A küldő biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="targetInsCo" type="basebns:companyCodeType">
+        <xsd:annotation>
+          <xsd:documentation>A címzett biztosító</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="resultOfRequest" type="basebns:resultOfRequestType">
+        <xsd:annotation>
+          <xsd:documentation>A kérés sikeressége, vagy hibaok</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="contractorData" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>A lekérdezett szerződő adatai (sikeres lekérdezés esetén)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice>
+              <xsd:annotation>
+                <xsd:documentation>Szerződő adatai</xsd:documentation>
+              </xsd:annotation>
+              <xsd:element name="person" type="basebns:personType">
+                <xsd:annotation>
+                  <xsd:documentation>Ha a szerződő természetes személy</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element name="legalEntity" type="basebns:legalEntityType">
+                <xsd:annotation>
+                  <xsd:documentation>Ha a szerződő jogi személy</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:choice>
+            <xsd:element name="contractorInternalUid" type="basebns:contractorInternalUidType">
+              <xsd:annotation>
+                <xsd:documentation>A lekérdezett szerződő egyedi belső azonosítója</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="messageID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Üzenet egyedi azonosító</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="referenceID" type="basebns:msgIdType" use="required">
+      <xsd:annotation>
+        <xsd:documentation>A megválaszolt kérés egyedi azonosítója.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="messageDateTime" type="basebns:bomaDateTime" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Az üzenet feladásának ideje</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="requestersId">
+      <xsd:annotation>
+        <xsd:documentation>A kérés üzenet feladójának saját azonosítója, a válaszban is változatlan tartalommal jelen van. </xsd:documentation>
+      </xsd:annotation>
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="highPriorityRequest" type="xsd:boolean" default="false">
+      <xsd:annotation>
+        <xsd:documentation>Real-time kérés ? (Default: batch)</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+</xsd:schema>
