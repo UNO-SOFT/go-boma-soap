@@ -104,7 +104,7 @@ func TestStreamXMLStress(t *testing.T) {
 				t.Parallel()
 				targets := make([]string, n)
 				for i := range targets {
-					targets[i] = fmt.Sprintf("%05d", i+1)
+					targets[i] = stressCompanyCodes[i%len(stressCompanyCodes)]
 				}
 				payload := stressPayload(4 << 10)
 				req := SendXmlMultiBomaMsgRequest{
@@ -169,7 +169,7 @@ func TestStreamXMLStress(t *testing.T) {
 				t.Errorf("%s: got %q, want %q", name, pair[0], pair[1])
 			}
 		}
-		if want := req.DateTime.Time.Format(time.RFC3339); got.Header.DateTime != want {
+		if want := formatStressDateTime(req.DateTime.Time); got.Header.DateTime != want {
 			t.Errorf("messageDateTime: got %q, want %q", got.Header.DateTime, want)
 		}
 		if string(got.MsgData) != payload {
@@ -216,9 +216,9 @@ func newStressSendRequest(size int, data string) SendXmlBomaMsgRequest {
 	return SendXmlBomaMsgRequest{
 		MsgHeader: MsgHeader{
 			Type:   "INF_NEW_BM_RATING",
-			Sender: "00001",
-			Target: "00002",
-			MsgID:  fmt.Sprintf("STRESS-%d", size),
+			Sender: "01",
+			Target: "02",
+			MsgID:  fmt.Sprintf("STRESS-%010d", size),
 		},
 		DateTime: sql.NullTime{Time: time.Date(2026, 10, 22, 12, 34, 56, 0, time.UTC), Valid: true},
 		Data:     []byte(data),
@@ -283,7 +283,7 @@ func checkSendDocument(t *testing.T, got sendXMLDocument, want SendXmlBomaMsgReq
 		"requestersId":       {got.Header.ReqID, want.ReqID},
 		"encryptionRequired": {got.EncryptionRequired, "true"},
 		"serviceRequested":   {got.ServiceRequested, "SEND"},
-		"messageDateTime":    {got.Header.DateTime, want.DateTime.Time.Format(time.RFC3339)},
+		"messageDateTime":    {got.Header.DateTime, formatStressDateTime(want.DateTime.Time)},
 	} {
 		if pair[0] != pair[1] {
 			t.Errorf("%s: got %q, want %q", name, pair[0], pair[1])
@@ -301,6 +301,19 @@ var xmllint = sync.OnceValue(func() string {
 
 const stressSchema = "soapXmlMsgServices.xsd"
 
+const stressDateTimeLayout = "2006-01-02T15:04:05.999999999-07:00"
+
+var stressCompanyCodes = []string{
+	"00", "01", "02", "03", "04", "05", "07", "08",
+	"12", "13", "14", "17", "18", "19", "20", "21",
+	"22", "23", "40", "41", "42", "43", "60", "87",
+	"88", "89", "98", "99",
+}
+
+func formatStressDateTime(t time.Time) string {
+	return t.Format(stressDateTimeLayout)
+}
+
 func validateWithXSD(t *testing.T, doc string) {
 	t.Helper()
 	schema := filepath.Join("testdata", "xsd", stressSchema)
@@ -315,7 +328,7 @@ func validateWithXSD(t *testing.T, doc string) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
-	cmd := exec.CommandContext(ctx, xmllint(), "--noout", "--stream", "--schema", stressSchema, "-")
+	cmd := exec.CommandContext(ctx, xmllint(), "--huge", "--noout", "--stream", "--schema", stressSchema, "-")
 	cmd.Dir = filepath.Dir(schema)
 	cmd.Stdin = strings.NewReader(doc)
 	var errBuf strings.Builder

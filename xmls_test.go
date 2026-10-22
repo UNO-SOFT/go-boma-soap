@@ -28,7 +28,7 @@ func TestExtractXml(t *testing.T) {
 	var errBuf strings.Builder
 	schema := "soapXmlMsgServices.xsd"
 	cmd := exec.CommandContext(ctx, "xmllint", "--noout", "--schema", schema, "-")
-	cmd.Dir = "../xsd"
+	cmd.Dir = "testdata/xsd"
 	cmd.Stdin = strings.NewReader(got)
 	cmd.Stderr = &errBuf
 	if err := cmd.Run(); err != nil {

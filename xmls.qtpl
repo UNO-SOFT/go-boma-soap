@@ -3,18 +3,17 @@
 {% import "encoding/base64" %}
 {% import "encoding/xml" %}
 {% import "fmt" %}
-{% import "time" %}
 {% import "github.com/tgulacsi/go/bufpool" %}
 
 {% stripspace %}
 
 {% func (x SendXmlMultiBomaMsgRequest) XML() %}
-<sendXmlMultiBomaMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
+<sendXmlMultiMsgRequest xmlns="http://www.qualysoft.hu/services/schemas/boma/bomamsgservices" xmlns:basebns="http://www.mabisz.hu/boma">
   <targetList>{% for _, y := range x.Targets %}
     <targetInsCo>{%= XML(y) %}</targetInsCo>
   {% endfor %}</targetList>
   {%= x.SendXmlBomaMsgRequest.XML() %}
-</sendXmlMultiBomaMsgRequest>
+</sendXmlMultiMsgRequest>
 {% endfunc %}
 
 {% func (x SendXmlBomaMsgRequest) XML() %}
@@ -72,7 +71,7 @@ xmlEsc := func(x string) string {
   s, ok := x.(string)
   if !ok {
     if t := getTime(x); !t.IsZero() {
-      s = t.Format(time.RFC3339)
+      s = t.Format("2006-01-02T15:04:05.999999999-07:00")
     }
   }
 %}{% if s != "" %}{%s= s %}{% endif %}
