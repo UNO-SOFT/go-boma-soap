@@ -337,10 +337,10 @@ func (x SendXmlBomaMsgRequest) HasROR() bool {
 func StreamData(W *quicktemplate.Writer, data any) error {
 	switch x := data.(type) {
 	case []byte:
-		_, err := W.W().Write(x)
+		_, err := W.W().Write(trimXMLHeaderBytes(x))
 		return err
 	case string:
-		_, err := io.WriteString(W.W(), x)
+		_, err := io.WriteString(W.W(), trimXMLHeader(x))
 		return err
 	}
 	if rdr, ok := data.(interface{ io.Reader }); ok {
@@ -394,6 +394,15 @@ func trimXMLHeader(s string) string {
 		}
 	}
 	return s
+}
+
+func trimXMLHeaderBytes(p []byte) []byte {
+	if rest, ok := bytes.CutPrefix(p, []byte("<?xml")); ok {
+		if _, rest, ok = bytes.Cut(rest, []byte("?>")); ok {
+			return bytes.TrimSpace(rest)
+		}
+	}
+	return p
 }
 
 func getTime(t any) time.Time {
