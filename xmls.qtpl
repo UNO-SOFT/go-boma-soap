@@ -3,7 +3,6 @@
 {% import "encoding/base64" %}
 {% import "encoding/xml" %}
 {% import "fmt" %}
-{% import "time" %}
 {% import "github.com/tgulacsi/go/bufpool" %}
 
 {% stripspace %}
@@ -72,7 +71,17 @@ xmlEsc := func(x string) string {
   s, ok := x.(string)
   if !ok {
     if t := getTime(x); !t.IsZero() {
-      s = t.Format(time.RFC3339)
+      s = t.Format(DateTimeFormat)
+    }
+  }
+%}{% if s != "" %}{%s= s %}{% endif %}
+{% endfunc %}
+
+{% func Xdate(x any) %}{% code
+  s, ok := x.(string)
+  if !ok {
+    if t := getTime(x); !t.IsZero() {
+      s = t.Format(DateFormat)
     }
   }
 %}{% if s != "" %}{%s= s %}{% endif %}

@@ -30,6 +30,11 @@ import (
 
 //go:generate go tool qtc
 
+const (
+	DateFormat     = "2006-01-02"
+	DateTimeFormat = time.RFC3339
+)
+
 var (
 	DefaultRateLimit = rate.Limit(3)
 
